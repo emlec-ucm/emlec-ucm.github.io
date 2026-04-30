@@ -13,6 +13,19 @@
 
 * 2026
 
+** 2026-05-12
+   :PROPERTIES:
+   :HTML_CONTAINER_CLASS: session
+   :SCHEDULED: <2026-05-12 Thu 11:30>
+   :SPEAKERS: Juan Manuel Sanchez Cartas
+   :LOCATION: Aula 302, Pabellón de Primero
+   :END:
+
+   - *Ponentes:* Juan Manuel Sanchez Cartas
+   - *Hora:* 11:30
+   - *Lugar:* Aula 302, Pabellón de Primero
+
+
 ** 2026-04-21
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: session

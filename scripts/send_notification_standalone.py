@@ -239,7 +239,7 @@ def build_reminder_email(session):
     <tr><td style="padding: 6px 12px;">📍 <strong>Lugar:</strong></td><td style="padding: 6px 12px;">{location}</td></tr>
   </table>
   <p>¡No lo olvidéis!</p>
-  <p>Podéis consultar más detalles en:<br>
+  <p>Podéis consultar el histórico completo de sesiones en:<br>
      <a href="{WEB_URL}">{WEB_URL}</a>
   </p>
   <hr style="border: none; border-top: 1px solid #ccc; margin: 24px 0;">
@@ -262,7 +262,7 @@ Os recordamos que MAÑANA tendremos sesión de The Computational Garage:
 
 ¡No lo olvidéis!
 
-Podéis consultar más detalles en:
+Podéis consultar el histórico completo de sesiones en:
 {WEB_URL}
 
 --
