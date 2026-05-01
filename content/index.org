@@ -28,10 +28,10 @@
 # https://www.ucm.es/data/cont/docs/3-2016-07-21-Marca%20UCM%20logo%20negro.png
 
 # +CAPTION: Título de la imagen
-#+attr_html: :width 1000px
+#+attr_html: :width 900px
 #+ATTR_HTML: :align center
-#+ATTR_LATEX: :width 0.8\textwidth :center t
-#+ATTR_ORG: :width 800
+#+ATTR_LATEX: :width 0.6\textwidth :center t
+#+ATTR_ORG: :width 600
 [[file:logo_eesml_ucm.svg]]
 
 El grupo de investigación [[https://www.ucm.es/grupos/grupo/225][/ECONOMETRÍA EN ESPACIO DE LOS ESTADOS Y MACHINE LEARNING/]] fue fundado en diciembre de 2004 con el objetivo de organizar nuestras investigaciones sobre la teoría y aplicaciones de los métodos en el Espacio de Estados, enfocándonos especialmente a la modelización econométrica de series temporales. 
@@ -43,8 +43,6 @@ Con el tiempo, hemos ampliado nuestro ámbito de estudio al campo del /Machine L
 - [[https://produccioncientifica.ucm.es/grupos/5080/publicaciones][Publicaciones]]
 - [[https://produccioncientifica.ucm.es/grupos/5080/colaboracion][Colaboración]]
 - [[https://produccioncientifica.ucm.es/grupos/5080/tesis][Tesis]]
-
-Enlace a la [[https://www.ucm.es/grupoee/][antigua web del grupo]].
 
 Algunos de los proyectos desarrollados en este grupo han sido implementados en la [[file:E4.org][toolbox */E4/*]] de MatLab.
 
@@ -58,8 +56,16 @@ Facultad de Ciencias Económicas de la UCM. Campus de Somosaguas. 28223 Pozuelo 
 #+ATTR_ORG: :width 400
 [[file:TheComputationalGarage.org][file:TheComputationalGarage/LogoAlargadoRecortado.png]]
 
-Desde este grupo estimulamos el intercambio de ideas y la creación de vínculos académicos entre jóvenes investigadores. Más información [[file:TheComputationalGarage.org][*aquí*]]
+Desde este grupo estimulamos el intercambio de ideas y la creación de vínculos académicos entre jóvenes investigadores.
+Más información [[file:TheComputationalGarage.org][*aquí*]]
 
-* COMMENT Enlace a la antigua web y enlace a la información del grupo
+*  Contacto
 
-# +INCLUDE: "../README.org::* Enlaces" :only-contents t 
+Nuestro grupo tiene su sede en la Facultad de Ciencias Económicas de la UCM.
+Campus de Somosaguas. 28223 Pozuelo de Alarcón (MADRID).
+
+La persona de contacto es Alfredo García-Hiernaux. Puede enviarle un e-mail pulsando [[https://www.ucm.es/grupoee/formulario][aquí]].
+
+* 
+
+Enlace a la [[https://www.ucm.es/grupoee/][antigua web del grupo]].

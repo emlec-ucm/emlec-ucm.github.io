@@ -1,9 +1,9 @@
-<svg width="1220" height="480" viewBox="0 0 1220 480" role="img" xmlns="http://www.w3.org/2000/svg">
+<svg width="1400" height="480" viewBox="0 0 1400 480" role="img" xmlns="http://www.w3.org/2000/svg">
   <title>EESML — Econometría en espacio de estados y machine learning, UCM</title>
   <desc>Logo del grupo de investigación Econometría en espacio de estados y machine learning de la Universidad Complutense de Madrid (ICAE), fundado en 2004.</desc>
 
   <!-- Fondo blanco (necesario para og:image) -->
-  <rect width="1220" height="480" fill="#ffffff"/>
+  <rect width="1400" height="480" fill="#ffffff"/>
 
   <!-- === SÍMBOLO === -->
   <rect x="140" y="85" width="310" height="310" rx="28" fill="#185FA5"/>
@@ -49,16 +49,16 @@
 
   <!-- === TEXTO DERECHA === -->
 
-  <!-- Siglas -->
-  <text x="510" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="32" font-weight="400" fill="#185FA5" letter-spacing="0.02em">Econometría en Espacio de los Estados</text>
+  <!-- Primera parte del nombre -->
+  <text x="510" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="44" font-weight="400" fill="#185FA5" letter-spacing="0.02em">Econometría en Espacio de los Estados</text>
 
-  <!-- Nombre largo -->
-  <text x="510" y="240" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="32" font-weight="400" fill="#5F5E5A" letter-spacing="0.02em">y Machine Learning</text>
+  <!-- Segunda parte del nombre -->
+  <text x="510" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="44" font-weight="400" fill="#5F5E5A" letter-spacing="0.02em">y Machine Learning</text>
   
   <!-- Separador -->
-  <line x1="510" y1="280" x2="980" y2="280" stroke="#B5D4F4" stroke-width="1.2"/>
+  <line x1="510" y1="310" x2="980" y2="310" stroke="#B5D4F4" stroke-width="1.2"/>
 
   <!-- Institución -->
-  <text x="510" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" font-weight="400" fill="#B4B2A9" letter-spacing="0.06em">UNIVERSIDAD COMPLUTENSE DE MADRID · desde 2004</text>
+  <text x="510" y="335" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" font-weight="400" fill="#B4B2A9" letter-spacing="0.06em">UNIVERSIDAD COMPLUTENSE DE MADRID · desde 2004</text>
 
 </svg>
