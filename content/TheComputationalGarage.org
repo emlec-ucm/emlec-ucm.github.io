@@ -1,6 +1,6 @@
 #+TITLE: The Computational Garage
 # +SUBTITLE: Econometría en el Espacio de los Estados y Machine Learning
-#+AUTHOR: Econometría en el Espacio de los Estados y Machine Learning 
+#+AUTHOR: Econometría, Machine Learning y Economía Computacional
 # Grupo de Investigación UCM
 #+LANGUAGE: es
 #+DATE: Febrero de 2026
@@ -8,14 +8,14 @@
 #+OPTIONS: title:nil
 
 # Metadatos SEO para Google y otros buscadores
-#+HTML_HEAD: <meta name="description" content="The Computational Garage es una iniciativa del Grupo de Investigación de Econometría en Espacio de los Estados y Machine Learning de la Universidad Complutense de Madrid (UCM) para intercambio académico entre jóvenes investigadores.">
-#+HTML_HEAD: <meta name="keywords" content="Computational Garage, UCM, Universidad Complutense, Universidad Complutense de Madrid, Econometría, Machine Learning, Espacio de Estados, Grupo de Investigación, seminarios, investigación, doctorandos">
-#+HTML_HEAD: <meta name="author" content="Grupo de Investigación UCM - Econometría en Espacio de los Estados y Machine Learning">
+#+HTML_HEAD: <meta name="description" content="The Computational Garage es una iniciativa del Grupo de Investigación de Econometría, Machine Learning y Economía Computacional de la Universidad Complutense de Madrid (UCM) para intercambio académico entre jóvenes investigadores.">
+#+HTML_HEAD: <meta name="keywords" content="Computational Garage, UCM, Universidad Complutense, Universidad Complutense de Madrid, Econometría, Machine Learning, Economía Computacional, Espacio de Estados, Grupo de Investigación, seminarios, investigación, doctorandos">
+#+HTML_HEAD: <meta name="author" content="Grupo de Investigación UCM - Econometría, Machine Learning y Economía Computacional">
 #+HTML_HEAD: <meta property="og:title" content="The Computational Garage - UCM">
-#+HTML_HEAD: <meta property="og:description" content="Iniciativa del Grupo de Investigación de la Universidad Complutense de Madrid para intercambio académico entre jóvenes investigadores en econometría y machine learning.">
+#+HTML_HEAD: <meta property="og:description" content="Iniciativa del Grupo de Investigación de la Universidad Complutense de Madrid para intercambio académico entre jóvenes investigadores en econometría, machine learning y economía computacional.">
 #+HTML_HEAD: <meta property="og:type" content="website">
-#+HTML_HEAD: <meta property="og:url" content="https://statespaceeconometrics-mlearning-rgroup.github.io/TheComputationalGarage.html">
-#+HTML_HEAD: <meta property="og:image" content="https://statespaceeconometrics-mlearning-rgroup.github.io/TheComputationalGarage/LogoOKrecortado.png">
+#+HTML_HEAD: <meta property="og:url" content="https://emlec-ucm.github.io/TheComputationalGarage.html">
+#+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/TheComputationalGarage/TCG-EMLEC-Alargado.png">
 #+HTML_HEAD: <meta name="twitter:card" content="summary_large_image">
 #+HTML_HEAD: <meta name="geo.region" content="ES-MD">
 #+HTML_HEAD: <meta name="geo.placename" content="Madrid, España">
@@ -35,7 +35,6 @@
 #+ATTR_HTML: :align center
 #+ATTR_LATEX: :width 0.8\textwidth :center t
 #+ATTR_ORG: :width 400
-# [[file:TheComputationalGarage/LogoOKrecortado.png]]
 [[file:TheComputationalGarage/TCG-EMLEC-Alargado.png]]
 
 #+begin_quote

@@ -6,9 +6,9 @@
 #+OPTIONS: title:nil
 
 # Metadatos SEO para Google y otros buscadores
-#+HTML_HEAD: <meta name="description" content="Grupo UCM de econometría, machine learning y economía computacional. Investigación en series temporales, modelos factoriales y predicción económica.">
-#+HTML_HEAD: <meta name="keywords" content="Econometría, Machine Learning, Espacio de Estados, series temporales, modelos de subespacios, subspace methods, modelos factoriales dinámicos, predicción económica, forecasting, análisis de convergencia de precios, Google Trends, Shapley values, XGBoost, UCM, Universidad Complutense de Madrid, AI trustworthy, green AI, DHR, Dynamic Harmonic Regression, Grupo de Investigación">
-#+HTML_HEAD: <meta name="author" content="Grupo de Investigación UCM - Econometría en Espacio de los Estados y Machine Learning">
+#+HTML_HEAD: <meta name="description" content="Grupo UCM de Econometría, Machine Learning y Economía Computacional. Investigación en series temporales, modelos factoriales y predicción económica.">
+#+HTML_HEAD: <meta name="keywords" content="econometría, machine learning, economía computacional, series temporales, modelos de subespacios, subspace methods, modelos factoriales dinámicos, predicción económica, forecasting, análisis de convergencia de precios, Google Trends, Shapley values, XGBoost, UCM, Universidad Complutense de Madrid, AI trustworthy, green AI, DHR, Dynamic Harmonic Regression, Grupo de Investigación">
+#+HTML_HEAD: <meta name="author" content="Grupo de Investigación UCM - Econometría, Machine Learning y Economía Computacional">
 #+HTML_HEAD: <meta property="og:title" content="Econometría, Machine Learning y Economía Computacional - UCM">
 #+HTML_HEAD: <meta property="og:description" content="Grupo de investigación de la Universidad Complutense de Madrid fundado en 2004. Investigación en series temporales, modelos factoriales dinámicos, predicción económica y machine learning.">
 #+HTML_HEAD: <meta property="og:type" content="website">
@@ -64,8 +64,7 @@ Algunos de los proyectos desarrollados en este grupo han sido implementados en l
 #+attr_html: :width 350px
 #+ATTR_HTML: :align center
 #+ATTR_ORG: :width 400
-[[file:TheComputationalGarage/TCG-EMLEC-Alargado.png]]
-# [[file:TheComputationalGarage.org][file:TheComputationalGarage/LogoAlargadoRecortado.png]]
+[[file:TheComputationalGarage.org][file:TheComputationalGarage/TCG-EMLEC-Alargado.png]]
 
 Desde este grupo estimulamos el intercambio de ideas y la creación de vínculos académicos entre jóvenes investigadores.
 Más información [[file:TheComputationalGarage.org][*aquí*]]
