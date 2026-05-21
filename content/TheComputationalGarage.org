@@ -31,7 +31,7 @@
 # +latex: \maketitle
 
 # +CAPTION: Título de la imagen
-#+attr_html: :width 450px
+#+attr_html: :width 800px
 #+ATTR_HTML: :align center
 #+ATTR_LATEX: :width 0.8\textwidth :center t
 #+ATTR_ORG: :width 400

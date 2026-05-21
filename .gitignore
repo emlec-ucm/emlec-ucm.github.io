@@ -4,6 +4,7 @@ __pycache__/
 *.py[cod]
 content/index.html
 content/logo_eesml_ucm.orig.svg
+content/TheComputationalGarage.html
 
 # This .gitignore is appropriate for repositories deployed to GitHub Pages and using
 # a Gemfile as specified at https://github.com/github/pages-gem#conventional
