@@ -1,5 +1,5 @@
 *~
-docs/
+docs/README.org
 __pycache__/
 *.py[cod]
 content/index.html
