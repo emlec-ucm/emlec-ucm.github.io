@@ -13,7 +13,7 @@
 #+HTML_HEAD: <meta property="og:description" content="Grupo de investigación de la Universidad Complutense de Madrid fundado en 2004. Investigación en series temporales, modelos factoriales dinámicos, predicción económica y machine learning.">
 #+HTML_HEAD: <meta property="og:type" content="website">
 #+HTML_HEAD: <meta property="og:url" content="https://emlec-ucm.github.io/index.html">
-#+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/content/emlec-alargado-luna.jpeg">
+#+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/content/emlec-alargado-luna.png">
 #+HTML_HEAD: <meta name="twitter:card" content="summary_large_image">
 #+HTML_HEAD: <meta name="geo.region" content="ES-MD">
 #+HTML_HEAD: <meta name="geo.placename" content="Madrid, España">
@@ -32,16 +32,16 @@
 # #+ATTR_HTML: :align center
 # #+ATTR_LATEX: :width 0.6\textwidth :center t
 # #+ATTR_ORG: :width 600
-# [[file:logo_eesml_ucm.svg]]
+# [[file:logo_emlec_ucm-alargado.png]]
 # +CAPTION: Título de la imagen
 #+attr_html: :width 700px
 #+ATTR_HTML: :align center
 #+ATTR_LATEX: :width 0.6\textwidth :center t
 #+ATTR_ORG: :width 600
-[[file:emlec-alargado-luna.jpeg]]
+[[file:emlec-alargado-luna.png]]
 
-El grupo de investigación [[https://www.ucm.es/grupos/grupo/225][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] fue fundado en diciembre de 2004 con el objetivo de organizar nuestras investigaciones sobre la teoría y aplicaciones de los métodos en el Espacio de Estados, enfocándonos especialmente a la modelización econométrica de series temporales. 
-Con el tiempo, hemos ampliado nuestro ámbito de estudio al campo del /Machine Learning/.
+El grupo de investigación [[https://www.ucm.es/grupos/grupo/225][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la UCM fue fundado en diciembre de 2004 con el objetivo de organizar nuestras investigaciones sobre la teoría y aplicaciones de los métodos en el Espacio de Estados, enfocándonos especialmente a la modelización econométrica de series temporales. 
+Con el tiempo, hemos ampliado nuestro ámbito de estudio al campo del /Machine Learning/ y la /Economía Computacional/.
  
 - [[https://produccioncientifica.ucm.es/grupos/5080/detalle][Detalle del grupo]]
 - [[https://produccioncientifica.ucm.es/grupos/5080/lineas][Líneas de investigación]]
