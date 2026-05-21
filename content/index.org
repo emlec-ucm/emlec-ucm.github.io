@@ -1,4 +1,4 @@
-# +title: 940223 - ECONOMETRÍA EN ESPACIO DE LOS ESTADOS Y MACHINE LEARNING
+#+HTML_HEAD: <meta name="google-site-verification" content="wW-F6I_sofep4cNq2N0PjMqTnY6NRo1mxH1p12xlW-c" />
 #+title: ECONOMETRÍA, MACHINE LEARNING Y ECONOMÍA COMPUTACIONAL
 #+LANGUAGE: es
 #+OPTIONS: toc:nil
