@@ -35,11 +35,11 @@
 #+ATTR_HTML: :align center
 #+ATTR_LATEX: :width 0.8\textwidth :center t
 #+ATTR_ORG: :width 400
-[[file:TheComputationalGarage/LogoOKrecortado.png]]
-
+# [[file:TheComputationalGarage/LogoOKrecortado.png]]
+[[file:TheComputationalGarage/TCG-EMLEC-Alargado.png]]
 
 #+begin_quote
-Ésta es una iniciativa del Grupo de Investigación (GI) [[https://statespaceeconometrics-mlearning-rgroup.github.io][/Econometría en Espacio de los Estados y Machine Learning/]] de la Universidad Complutense de Madrid (UCM), impulsada con absoluta independencia de ningún departamento o instituto de la UCM.
+Ésta es una iniciativa del Grupo de Investigación (GI) [[https://emlec-ucm.github.io][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la Universidad Complutense de Madrid (UCM), impulsada con absoluta independencia de ningún departamento o instituto de la UCM.
 #+end_quote
 
 * Sesiones programadas
@@ -64,10 +64,6 @@ La idea no es organizar un seminario tradicional, sino algo más parecido a lo q
 
 La iniciativa está pensada _para investigadores en etapas iniciales_ (ayudantes doctores, doctorandos en fases tempranas, estudiantes de TFM/TFG), pero sin excluir a investigadores seniors (o no tan seniors), afines al grupo y que deseen participar o involucrarse de alguna manera en esta iniciativa. 
 
-* COMMENT Temas de interés
-
-A pesar del rimbombante nombre de /Economía Computacional y Econometría/, todos los temas son bienvenidos.
-
 * Formato de las sesiones
 
 - Duración :: un máximo de 20 minutos de exposición y discusión podría ser suficiente.
@@ -88,32 +84,14 @@ A pesar del rimbombante nombre de /Economía Computacional y Econometría/, todo
 
 * Fechas y calendario
 
-- Periodicidad :: [por definir... no tiene por qué ser fija (/dependerá en gran medida de la demanda realizada por aquellos a quienes está destinada esta iniciativa/)].
+- Periodicidad :: por definir... /dependerá en gran medida de la demanda/.
 
-- Día de la semana en la que celebrar las reuniones :: [por definir]. 
+- Día de la semana en la que celebrar las reuniones :: En principio martes o viernes. 
 
-- Horario :: [idem. (/En cualquier caso nunca coincidirá con el seminario del Departamento/ICAE/)] 
+- Horario :: /Nunca coincidirá con el seminario del Departamento/ICAE/ 
 
 - Lugar :: Seminario 302.
 
 El calendario se irá cerrando de forma flexible; siempre en función de la disponibilidad y del número de participantes.
-
-* COMMENT Participantes
-
-- Potenciales participantes que pensamos que pueden estar interesados :: David Suárez, Juan Manuel Sánchez-Cartas, Nicolás Bonino, Franceska Tomori, Daniel Bacaicoa, David Guerrero, Miguel Burgos, Miguel Yagüe, Nicolás Lorenti, Eiko Alonso (TFG), Alba Miñano-Mañero, Young Kyu, Julio Rivera... (cualquier joven investigador que manifieste interés por contarnos alguna cosa afín a las líneas del [[https://statespaceeconometrics-mlearning-rgroup.github.io/#orgf965b5a][Grupo de Investigación]]).
-# Francesca Lipari, Patrizia Asurmendi, María Jesús Moreta...
-  - Padrinos de la idea ::  Alfredo García-Hiernaux, Paco Álvarez, Marcos Bujosa. 
-# *Y más que probablemente dispuestos a apoyarnos:* Elena, Gisela, Blanca, Juanito, Andrés, Manolín, Rafa(s)...
-
-
-*** COMMENT Nota para usuarios de Overleaf
-    :PROPERTIES:  
-    :UNNUMBERED: t
-    :END:  
-
-Documento transformado de MS Word a [[https://orgmode.org/][OrgMode]] con [[https://pandoc.org/][pandoc]]:
-#+BEGIN_SRC sh
-pandoc -f docx -t org PropuestaWorkshopInterno.docx -o  PropuestaWorkshopInterno.org
-#+END_SRC
 
 
