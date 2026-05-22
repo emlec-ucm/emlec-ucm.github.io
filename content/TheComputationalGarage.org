@@ -1,4 +1,4 @@
-#+TITLE: The Computational Garage - Intercambio académico en econometría y machine learning
+#+TITLE: The Computational Garage - EMLEC UCM
 # +SUBTITLE: Econometría en el Espacio de los Estados y Machine Learning
 #+AUTHOR: Econometría, Machine Learning y Economía Computacional
 # Grupo de Investigación UCM
@@ -8,11 +8,11 @@
 #+OPTIONS: title:nil
 
 # Metadatos SEO para Google y otros buscadores
-#+HTML_HEAD: <meta name="description" content="The Computational Garage: iniciativa del Grupo EMLEC (UCM) para el intercambio académico entre jóvenes investigadores en econometría, machine learning y economía computacional.">
-#+HTML_HEAD: <meta name="keywords" content="Computational Garage, UCM, Universidad Complutense, Universidad Complutense de Madrid, Econometría, Machine Learning, Economía Computacional, Espacio de estados, jóvenes investigadores">
+#+HTML_HEAD: <meta name="description" content="The Computational Garage: espacio del grupo EMLEC (UCM) para el intercambio académico entre jóvenes investigadores en econometría y machine learning.">
+#+HTML_HEAD: <meta name="keywords" content="Computational Garage, UCM, Universidad Complutense, Universidad Complutense de Madrid, Econometría, Machine Learning, Economía Computacional, Espacio de los Estados, series temporales, jóvenes investigadores">
 #+HTML_HEAD: <meta name="author" content="Grupo de Investigación UCM - Econometría, Machine Learning y Economía Computacional">
-#+HTML_HEAD: <meta property="og:title" content="The Computational Garage - UCM">
-#+HTML_HEAD: <meta property="og:description" content="The Computational Garage: iniciativa del Grupo EMLEC (UCM) para el intercambio académico entre jóvenes investigadores en econometría, machine learning y economía computacional.">
+#+HTML_HEAD: <meta property="og:title" content="The Computational Garage - EMLEC UCM">
+#+HTML_HEAD: <meta property="og:description" content="The Computational Garage: espacio del grupo EMLEC (UCM) para el intercambio académico entre jóvenes investigadores en econometría y machine learning.">
 #+HTML_HEAD: <meta property="og:type" content="website">
 #+HTML_HEAD: <meta property="og:url" content="https://emlec-ucm.github.io/TheComputationalGarage.html">
 #+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/TheComputationalGarage/TCG-EMLEC-Alargado.png">
@@ -32,7 +32,7 @@
 # +latex: \maketitle
 
 #+BEGIN_EXPORT html
-<h1 class="sr-only">The Computational Garage - Intercambio académico en econometría y machine learning (EMLEC - UCM)</h1>
+<h1 class="sr-only">The Computational Garage - Econometría, Machine Learning y Economía Computacional (EMLEC - UCM)</h1>
 #+END_EXPORT
 
 # +CAPTION: Título de la imagen
@@ -66,7 +66,7 @@ La idea no es organizar un seminario tradicional, sino algo más parecido a lo q
 
 * A quién va dirigido
 
-La iniciativa está pensada _para investigadores en etapas iniciales_ (ayudantes doctores, doctorandos en fases tempranas, estudiantes de TFM/TFG), pero sin excluir a investigadores seniors (o no tan seniors).
+La iniciativa está pensada _para investigadores en etapas iniciales_ (ayudantes doctores, doctorandos en fases tempranas, estudiantes de TFM/TFG), pero sin excluir a investigadores seniors (o no tan jóvenes) que quieran participar.
 
 * Formato de las sesiones
 
