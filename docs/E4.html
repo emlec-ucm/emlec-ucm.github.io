@@ -1,50 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>E4 toolbox</title>
+<title>E4 Toolbox - MATLAB para análisis de series temporales en espacio de estados</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
+<meta name="description" content="E4 es una toolbox de MATLAB para modelización y análisis de series temporales mediante métodos de espacio de estados, desarrollada por el grupo EMLEC de la UCM.">
+<meta name="author" content="Grupo de Investigación UCM - Econometría, Machine Learning y Economía Computacional">
+<meta property="og:title" content="E4 Toolbox - MATLAB para series temporales en espacio de estados">
+<meta property="og:description" content="E4 es una toolbox de MATLAB para modelización y análisis de series temporales mediante métodos de espacio de estados, desarrollada por el grupo EMLEC de la UCM.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emlec-ucm.github.io/E4.html">
+<meta name="twitter:card" content="summary">
+<meta name="geo.region" content="ES-MD">
+<meta name="geo.placename" content="Madrid, España">
+<style>.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }</style>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+html,button,input,select,textarea {margin: 0; background-image: url(https://www.ucm.es/data/cont/docs/3-2016-07-21-Escudo%20UCM%20grises.png); background-attachment: fixed; background-position: right bottom; background-repeat: no-repeat; background-size: 8%; color: #484C66;}html {  font-size: 90%;  line-height: 1.4;}*,*:before,*:after {  -moz-box-sizing: border-box;  -webkit-box-sizing: border-box;  box-sizing: border-box;}a {  white-space: pre;  white-space: pre-wrap;  white-space: pre-line;  white-space: -pre-wrap;  white-space: -o-pre-wrap;  white-space: -moz-pre-wrap;  white-space: -hp-pre-wrap;  word-wrap: break-word;  text-decoration: none;}a:hover {  color: #0A4C89;}/* * Remove text-shadow in selection highlight: h5bp.com/i * These selection rule sets have to be separate. * Customize the background color to match your design. */::-moz-selection {  background: #0A4C89;  color: #FFF;  text-shadow: none;}::selection {  background: #0A4C89;  color: #FFF;  text-shadow: none;}/* * A better looking default horizontal rule */hr {  display: block;  height: 1px;  border: 0;  border-top: 1px dashed #CCC;  margin: 1em 0;  padding: 0;}/* * Remove the gap between images, videos, audio and canvas and the bottom of * their containers: h5bp.com/i/440 */audio,canvas,img,video {  vertical-align: middle;}/* * Remove default fieldset styles. */fieldset {  border: 0;  margin: 0;  padding: 0;}/* * Allow only vertical resizing of textareas. */textarea {  resize: vertical;}/* ==========================================================================   Author's custom styles   ========================================================================== */.todo,.done,.tag {  font-family: "Source Pro", Monaco, "Courier New", monospace;  padding: 0 0.3em;  background-color: #EEE;  border: 1px solid #CCC;}.todo {  color: #DD4433;}.done {  color: #44934B;}.tag {  font-size: 80%;  font-weight: normal;  margin: 0 0.3em;  display: none;}.timestamp {  color: #BEBEBE;}.timestamp-kwd {  color: #5F9EA0;}.right {  margin-left: auto;  margin-right: 0px;  text-align: right;}.left {  margin-left: 0px;  margin-right: auto;  text-align: left;}.center {  margin-left: auto;  margin-right: auto;  text-align: center;}.underline {  text-decoration: underline;}#postamble p,#preamble p {  font-size: 90%;  margin: .2em;}pre,code {  font-family: "Source Pro", Monaco, "Courier New", monospace;  padding-left: 0.3em;  padding-right: 0.3em;}pre {  font-size: 90%;  padding: 8pt;  overflow: auto;  white-space: pre;  word-wrap: normal;}pre.src {  position: relative;}pre.src:before {  display: none;  position: absolute;  background-color: #FFF;  top: 0.5em;  right: 0.5em;  padding: 4px;  border: 1px solid #CCC;}pre.src-sh:before {  content: "Shell Script";}pre.src-bash:before {  content: "Bash Script";}pre.src-emacs-lisp:before {  content: "Emacs Lisp";}pre.src-R:before {  content: "R";}pre.src-perl:before {  content: "Perl";}pre.src-java:before {  content: "Java";}pre.src-sql:before {  content: "SQL";}pre.src-c:before {  content: "C";}pre.src-cpp:before {  content: "C++";}pre.src-html:before {  content: "HTML";}table {  border-collapse: collapse;  display: block;  overflow-x: auto;}caption.t-above {  caption-side: top;}caption.t-bottom {  caption-side: bottom;}td, th {  vertical-align: top;  border: 1px solid #CCC;  padding: 0.5em;}th.right {  text-align: center;}th.left {  text-align: center;}th.center {  text-align: center;}td.right {  text-align: right;}td.left {  text-align: left;}td.center {  text-align: center;}dt {  font-weight: bold;}#footnotes {  border-top: 5px solid #0A4C89;  margin-bottom: 5em;}#footnotes h2 {  display: none;}#text-footnotes {  margin-top: 1em;}.footpara:nth-child(2) {  display: inline;}.footpara {  display: block;}.footdef sup:before {  content: "[";}.footdef sup:after {  content: "]";}.footdef p {  display: inline;}figure {  margin: 0;}figure img {  max-width: 100%;}figcaption {  text-align: center;  font-size: 0.8rem;}.inlinetask {  padding: 10px;  border: 2px solid gray;  margin: 10px;  background: #ffffcc;}#org-div-home-and-up {  text-align: right;  font-size: 70%;  white-space: nowrap;}textarea {  overflow-x: auto;}.linenr {  font-size: smaller;}.code-highlighted {  background-color: #ffff00;}.org-info-js_info-navigation {  border-style: none;}#org-info-js_console-label {  font-size: 10px;  font-weight: bold;  white-space: nowrap;}.org-info-js_search-highlight {  background-color: #ffff00;  color: #000000;  font-weight: bold;}p.verse,blockquote {  margin: 0;  padding: 0;  padding-left: 3%;  border-left: 5px solid #0A4C89;}body {  font-family: Lora, Palatino, Georgia, serif;  width: 92%;  max-width: 1024px;  margin: 0 auto;  background-color: #FFF;}h2 {  line-height: 1.62em;}.title {  margin: 0 0 2em 0;  line-height: 2em;  border-bottom: 5px solid #0A4C89;  text-align: center;}#postamble {  font-size: 80%;  line-height: 1.4em;  text-align: right;}h1, h2, h3, h4, h5, h6 {  font-family: "Source Sans Pro", sans-serif;  color: #222;}.outline-2 {  margin-bottom: 4em;}.outline-2 h2 {  border-bottom: 1px solid #CCC;}.outline-text-2 code, pre {  background-color: #EEE;}#table-of-contents {  display: none;  margin-left: 0.5em;}#text-table-of-contents ul {  padding-left: 1.8em;}#text-table-of-contents li {  list-style-type: circle;  margin: 0.4em 0;}#text-table-of-contents ul ul {  margin: 0;}#text-table-of-contents li li {  font-weight: normal;  font-size: 90%;  margin: 0;}#content {  overflow: hidden;  *zoom: 1;}/* ==========================================================================   EXAMPLE Media Queries for Responsive Design.   These examples override the primary ('mobile first') styles.   Modify as content requires.   ========================================================================== */@media only screen and (min-width: 35em) {  /* Style adjustments for viewports that meet the condition */}@media print, (-o-min-device-pixel-ratio: 5 / 4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {  /* Style adjustments for high resolution devices */}/* ==========================================================================   Print styles.   Inlined to avoid required HTTP connection: h5bp.com/r   ========================================================================== */@media print {  * {    background: transparent !important;    color: #000 !important;    /* Black prints faster: h5bp.com/s */    box-shadow: none !important;    text-shadow: none !important;  }  a,  a:visited {    text-decoration: underline;  }  a[href]:after {    content: " (" attr(href) ")";  }  abbr[title]:after {    content: " (" attr(title) ")";  }  /*   * Don't show links for images, or javascript/internal links   */  .ir a:after,  a[href^="javascript:"]:after,  a[href^="#"]:after {    content: "";  }  pre,  blockquote {    /* border: 1px solid #999; */    page-break-inside: avoid;  }  thead {    display: table-header-group;    /* h5bp.com/t */  }  tr,  img {    page-break-inside: avoid;  }  img {    max-width: 100% !important;  }  @page {    margin: 0.5cm;  }  p,  h2,  h3 {    orphans: 3;    widows: 3;  }  h2,  h3 {    page-break-after: avoid;  }  #table-of-contents {    display: block;    width: initial;    border: none;  }  #table-of-contents a {    text-decoration: none;  }}/* large screen */@media screen and (min-width: 40rem) {  html {    font-size: 100%;  }  #table-of-contents {    display: block;    padding: 1em;    width: 32%;    min-width: 18em;    float: right;    background-color: #EEE;    position: relative;    /* required by z-index */    z-index: 5000;    border: 1px solid #CCC;  }  .tag {    display: initial;  }}
+</style>
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">E4 toolbox</h1>
-<div id="table-of-contents" role="doc-toc">
+<nav id="table-of-contents" role="doc-toc">
 <h2>&Iacute;ndice</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcf74c62">A MATLAB toolbox for time series analysis</a>
+<li><a href="#orgaadbd5f">A MATLAB toolbox for time series analysis</a>
 <ul>
-<li><a href="#org00253dc">What is E4 ?</a></li>
-<li><a href="#orgfa34fea">Companion book</a></li>
+<li><a href="#orga68d04b">What is E4 ?</a></li>
+<li><a href="#org1608941">Companion book</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
+</nav>
+<h1 class="sr-only">E4 Toolbox - MATLAB para análisis de series temporales en espacio de estados (EMLEC - UCM)</h1>
 
-<div id="outline-container-orgcf74c62" class="outline-2">
-<h2 id="orgcf74c62">A MATLAB toolbox for time series analysis</h2>
-<div class="outline-text-2" id="text-orgcf74c62">
+<div id="outline-container-orgaadbd5f" class="outline-2">
+<h2 id="orgaadbd5f">A MATLAB toolbox for time series analysis</h2>
+<div class="outline-text-2" id="text-orgaadbd5f">
 </div>
-<div id="outline-container-org00253dc" class="outline-3">
-<h3 id="org00253dc">What is E4 ?</h3>
-<div class="outline-text-3" id="text-org00253dc">
+<div id="outline-container-orga68d04b" class="outline-3">
+<h3 id="orga68d04b">What is E4 ?</h3>
+<div class="outline-text-3" id="text-orga68d04b">
 <p>
-E4 is a MATLAB Toolbox for time series modeling and analysis. Its name, E4, refers to the Spanish <i>Estimación de modelos Econométricos en Espacio de los Estados</i>, meaning "State-Space Estimation of Econometric Models".
+E4 is a MATLAB Toolbox for time series modeling and analysis. Its name, E4, refers to the Spanish <i>Estimación de modelos Econométricos en Espacio de los Estados</i>, meaning "State-Space Estimation of Econometric models".
 </p>
 
 <p>
-E4  uses state-space methods to achieve flexibility and reliability. Despite its orientation to state-space, it also supports many standard time series models, such as VARMAX, structural econometric models or single-output transfer functions. These models can be estimated by exact maximum-likelihood, either under standard conditions or in an extended framework that allows for measurement errors, missing data, vector GARCH errors and constraints on the parameters.
+E4  uses state-space methods to achieve flexibility and reliability. Despite its orientation to state-space, it also supports many standard time series models, such as VARMAX, structural econometric models, unobserved components, and many others.
 </p>
 
 <p>
-The Toolbox also includes ready-to-use functions for model specification, preliminary parameter estimation, analytical computation of the likelihood gradient and the information matrix, simulation, forecasting and signal extraction.
+The Toolbox also includes ready-to-use functions for model specification, preliminary parameter estimation, analytical computation of the likelihood gradient and the information matrix, simulation, forecasting, signal extraction, and more.
 </p>
 
 <p>
@@ -61,25 +71,25 @@ If you feel that  our contribution deserves an acknowledgement, you can do so by
 </div>
 </div>
 
-<div id="outline-container-orgfa34fea" class="outline-3">
-<h3 id="orgfa34fea">Companion book</h3>
-<div class="outline-text-3" id="text-orgfa34fea">
+<div id="outline-container-org1608941" class="outline-3">
+<h3 id="org1608941">Companion book</h3>
+<div class="outline-text-3" id="text-org1608941">
 <blockquote>
 <p>
-Jose Manuel Casals, Alfredo Garcia-Hiernaux, Miguel Jerez, Sonia Sotoca, Adao Alexandre Trindade: <a href="https://www.routledge.com/State-Space-Methods-for-Time-Series-Analysis-Theory-Applications-and-Software/Casals-Garcia-Hiernaux-Jerez-Sotoca-Trindade/p/book/9781482219593">State-Space Methods for Time Series Analysis: Theory, Applications and Software</a>. Chapman and Hall/CRC. ISBN 9781482219593 - CAT# K22164
+Jose Manuel Casals, Alfredo Garcia-Hiernaux, Miguel Jerez, Sonia Sotoca, Adao Alexandre Trindade: <a href="https://www.routledge.com/State-Space-Methods-for-Time-Series-Analysis-Theory-Applications-and-Software/Casals-Garcia-Hiernaux-Jerez-Sotoca-Trindade/p/book/9781482219593">State-Space Methods for Time Series Analysis. Theory, Applications and Software</a>. CRC Press, 2016.
 </p>
 </blockquote>
 
 <p>
-See this book at <a href="http://www.sponpress.com/books/details/9781482219593/">Taylor &amp; Francis</a>, <a href="https://www.crcpress.com/State-Space-Methods-for-Time-Series-Analysis-Theory-Applications-and-Software/Casals-GarciaHiernaux-Jerez-Sotoca-Trindade/9781482219593">Chapman and Hall/CRC</a> or <a href="http://www.amazon.com/State-Space-Methods-Time-Series-Analysis/dp/148221959X">Amazon.com</a>;
+See this book at <a href="http://www.sponpress.com/books/details/9781482219593/">Taylor &amp; Francis</a>, <a href="https://www.crcpress.com/State-Space-Methods-for-Time-Series-Analysis-Theory-Applications-and-Software/Casals-Garcia-Hiernaux-Jerez-Sotoca-Trindade/p/book/9781482219593">CRC Press</a>,
 or download free supplementary materials from the <a href="https://www.ucm.es/e-4/ss-book-microsite">book microsite</a>.
 </p>
 
 
-<div id="org2196c0e" class="figure">
-<p><a href="https://www.ucm.es/e-4/ss-book-microsite"><img src="https://www.ucm.es/data/cont/docs/1034-2016-02-11-9781482219593.jpg" alt="1034-2016-02-11-9781482219593.jpg" /></a>
-</p>
-</div>
+<figure id="orgc886059">
+<a href="https://www.ucm.es/e-4/ss-book-microsite"><img src="https://www.ucm.es/data/cont/docs/1034-2016-02-11-9781482219593.jpg" alt="1034-2016-02-11-9781482219593.jpg"></a>
+
+</figure>
 </div>
 </div>
 </div>
