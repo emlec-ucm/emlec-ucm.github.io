@@ -17,6 +17,7 @@
 #+HTML_HEAD: <meta name="twitter:card" content="summary_large_image">
 #+HTML_HEAD: <meta name="geo.region" content="ES-MD">
 #+HTML_HEAD: <meta name="geo.placename" content="Madrid, España">
+#+HTML_HEAD: <style>.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }</style>
 
 # ###########
 # ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
@@ -38,6 +39,9 @@
 #+ATTR_HTML: :align center
 #+ATTR_LATEX: :width 0.6\textwidth :center t
 #+ATTR_ORG: :width 600
+#+BEGIN_EXPORT html
+<h1 class="sr-only">Econometría, Machine Learning y Economía Computacional (EMLEC - UCM)</h1>
+#+END_EXPORT
 [[file:emlec-alargado-luna.png]]
 
 El grupo de investigación [[https://www.ucm.es/grupos/grupo/225][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la UCM fue fundado en diciembre de 2004 con el objetivo de organizar nuestras investigaciones sobre la teoría y aplicaciones de los métodos en el Espacio de Estados, enfocándonos especialmente a la modelización econométrica de series temporales. 
