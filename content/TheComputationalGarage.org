@@ -1,4 +1,4 @@
-#+TITLE: The Computational Garage
+#+TITLE: The Computational Garage - Intercambio académico en econometría y machine learning
 # +SUBTITLE: Econometría en el Espacio de los Estados y Machine Learning
 #+AUTHOR: Econometría, Machine Learning y Economía Computacional
 # Grupo de Investigación UCM
@@ -8,17 +8,18 @@
 #+OPTIONS: title:nil
 
 # Metadatos SEO para Google y otros buscadores
-#+HTML_HEAD: <meta name="description" content="The Computational Garage es una iniciativa del Grupo de Investigación de Econometría, Machine Learning y Economía Computacional de la Universidad Complutense de Madrid (UCM) para intercambio académico entre jóvenes investigadores.">
-#+HTML_HEAD: <meta name="keywords" content="Computational Garage, UCM, Universidad Complutense, Universidad Complutense de Madrid, Econometría, Machine Learning, Economía Computacional, Espacio de Estados, Grupo de Investigación, seminarios, investigación, doctorandos">
+#+HTML_HEAD: <meta name="description" content="The Computational Garage: iniciativa del Grupo EMLEC (UCM) para el intercambio académico entre jóvenes investigadores en econometría, machine learning y economía computacional.">
+#+HTML_HEAD: <meta name="keywords" content="Computational Garage, UCM, Universidad Complutense, Universidad Complutense de Madrid, Econometría, Machine Learning, Economía Computacional, Espacio de estados, jóvenes investigadores">
 #+HTML_HEAD: <meta name="author" content="Grupo de Investigación UCM - Econometría, Machine Learning y Economía Computacional">
 #+HTML_HEAD: <meta property="og:title" content="The Computational Garage - UCM">
-#+HTML_HEAD: <meta property="og:description" content="Iniciativa del Grupo de Investigación de la Universidad Complutense de Madrid para intercambio académico entre jóvenes investigadores en econometría, machine learning y economía computacional.">
+#+HTML_HEAD: <meta property="og:description" content="The Computational Garage: iniciativa del Grupo EMLEC (UCM) para el intercambio académico entre jóvenes investigadores en econometría, machine learning y economía computacional.">
 #+HTML_HEAD: <meta property="og:type" content="website">
 #+HTML_HEAD: <meta property="og:url" content="https://emlec-ucm.github.io/TheComputationalGarage.html">
 #+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/TheComputationalGarage/TCG-EMLEC-Alargado.png">
 #+HTML_HEAD: <meta name="twitter:card" content="summary_large_image">
 #+HTML_HEAD: <meta name="geo.region" content="ES-MD">
 #+HTML_HEAD: <meta name="geo.placename" content="Madrid, España">
+#+HTML_HEAD: <style>.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }</style>
 
 # ###########
 # ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
@@ -30,6 +31,10 @@
 
 # +latex: \maketitle
 
+#+BEGIN_EXPORT html
+<h1 class="sr-only">The Computational Garage - Intercambio académico en econometría y machine learning (EMLEC - UCM)</h1>
+#+END_EXPORT
+
 # +CAPTION: Título de la imagen
 #+attr_html: :width 800px
 #+ATTR_HTML: :align center
@@ -38,7 +43,7 @@
 [[file:TheComputationalGarage/TCG-EMLEC-Alargado.png]]
 
 #+begin_quote
-Ésta es una iniciativa del Grupo de Investigación (GI) [[https://emlec-ucm.github.io][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la Universidad Complutense de Madrid (UCM), impulsada con absoluta independencia de ningún departamento o instituto de la UCM.
+Ésta es una iniciativa del Grupo de Investigación (GI) [[https://emlec-ucm.github.io][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la Universidad Complutense de Madrid para estimular el intercambio de ideas y la creación de vínculos académicos entre jóvenes investigadores.
 #+end_quote
 
 * Sesiones programadas
@@ -49,7 +54,7 @@
 
 El objetivo de esta iniciativa es crear un espacio informal, recurrente y protegido donde investigadores en etapas iniciales de su carrera académica puedan:
 
-- Presentar y discutir trabajos preliminares (ideas en construcción, proyectos que “aún no funcionan”, primeros resultados).
+- Presentar y discutir trabajos preliminares (ideas en construcción, proyectos que "aún no funcionan", primeros resultados).
 
 - Conocerse y construir vínculos académicos.
 
@@ -61,7 +66,7 @@ La idea no es organizar un seminario tradicional, sino algo más parecido a lo q
 
 * A quién va dirigido
 
-La iniciativa está pensada _para investigadores en etapas iniciales_ (ayudantes doctores, doctorandos en fases tempranas, estudiantes de TFM/TFG), pero sin excluir a investigadores seniors (o no tan seniors), afines al grupo y que deseen participar o involucrarse de alguna manera en esta iniciativa. 
+La iniciativa está pensada _para investigadores en etapas iniciales_ (ayudantes doctores, doctorandos en fases tempranas, estudiantes de TFM/TFG), pero sin excluir a investigadores seniors (o no tan seniors).
 
 * Formato de las sesiones
 
@@ -77,7 +82,7 @@ La iniciativa está pensada _para investigadores en etapas iniciales_ (ayudantes
 
 * Reglas de juego
 
-- En ningún caso se espera que los trabajos estén “listos”; más bien, todo lo contrario.
+- En ningún caso se espera que los trabajos estén "listos"; más bien, todo lo contrario.
 
 - Una regla básica para la audiencia será escuchar, comentar con espíritu constructivo y evitar monopolizar la discusión.
 
