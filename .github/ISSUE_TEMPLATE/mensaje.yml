@@ -1,0 +1,35 @@
+name: Mensaje a los participantes
+description: Redacta un correo para enviarlo a la lista de The Computational Garage
+title: "[Mensaje] "
+labels: ["mensaje"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Cómo funciona
+        1. Escribe el **asunto** del correo en el título, después de `[Mensaje]`.
+        2. Escribe el **cuerpo** abajo (admite Markdown: negritas, listas, enlaces...).
+        3. Crea el issue. **Crear el issue no envía nada.**
+        4. Para revisarlo primero, añade la etiqueta **`prueba`**: se envía solo a la cuenta de correo del grupo.
+        5. Para enviarlo a todos los participantes, añade la etiqueta **`enviar`**. El issue se cerrará solo.
+
+        El correo lleva automáticamente la firma del grupo al final; no hace falta añadirla.
+        Los issues cerrados quedan como archivo de los mensajes enviados.
+  - type: textarea
+    id: mensaje
+    attributes:
+      label: Mensaje
+      description: Cuerpo del correo. Puedes usar la pestaña "Preview" para ver cómo queda.
+      placeholder: |
+        Hola a todos,
+
+        ...
+    validations:
+      required: true
+  - type: checkboxes
+    id: opciones
+    attributes:
+      label: Opciones
+      options:
+        - label: Incluir los datos de la próxima sesión programada (fecha, hora, ponente y lugar, tomados de sesiones.org)
+          required: false

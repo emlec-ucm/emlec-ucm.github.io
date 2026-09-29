@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://statespaceeconometrics-mlearning-rgroup.github.io/sitemap.xml
+Sitemap: https://emlec-ucm.github.io/sitemap.xml

@@ -13,3 +13,10 @@ La conversión a =html= se realiza mediante un workflow que sitúa los ficheros 
 
 - [[https://www.ucm.es/grupos/grupo/225][Grupo de investigación UCM]]
 - [[https://www.ucm.es/grupoee/][Antigua web]]
+
+* Correos a los participantes de The Computational Garage
+
+Los avisos de sesiones nuevas, los recordatorios diarios y el envío de
+mensajes libres a los participantes están automatizados con GitHub
+Actions.  La guía de uso para quienes tienen permisos en el repositorio
+está en [[file:SETUP_EMAIL_NOTIFICATIONS.md][SETUP_EMAIL_NOTIFICATIONS.md]].

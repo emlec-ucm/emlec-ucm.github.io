@@ -39,7 +39,7 @@
 				     :base-directory ,base-directory
 				     :base-extension "txt"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "docs\\|content\\|css\\|scripts\\|.git"
+				     :exclude "docs\\|content\\|css\\|scripts\\|requirements\\|.git"
 				     :recursive nil
 				     :publishing-function org-publish-attachment)
 

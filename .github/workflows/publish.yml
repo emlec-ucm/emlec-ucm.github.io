@@ -15,7 +15,9 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          # Historial completo: hace falta para comparar sesiones.org con el
+          # commit anterior al push (github.event.before) y detectar sesiones nuevas.
+          fetch-depth: 0
 
       - name: Instala Emacs y ejecuta publish.el
         run: |
@@ -27,8 +29,6 @@ jobs:
                 --eval "(package-refresh-contents)" \
                 --eval "(package-install 'htmlize)"
           emacs --batch -l publish.el
-          pwd
-          ls
           ls docs/*
 
       - name: Deploy docs/ a gh-pages
@@ -39,20 +39,11 @@ jobs:
           publish_branch: gh-pages
           destination_dir: docs
 
-      - name: Comprobar si sesiones.org ha cambiado
-        id: check_sesiones
-        run: |
-          if git diff --name-only HEAD^ HEAD 2>/dev/null | grep -q "content/TheComputationalGarage/sesiones.org"; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Enviar notificación de nueva sesión
-        if: steps.check_sesiones.outputs.changed == 'true'
+      # Compara sesiones.org con el estado anterior al push y envía un aviso
+      # por cada sesión nueva con fecha futura. Si no hay ninguna, no hace nada.
+      - name: Enviar aviso de sesiones nuevas
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
-        run: |
-          python3 scripts/send_session_notification.py
+        run: python3 scripts/tcg_mail.py announce --base "${{ github.event.before }}"

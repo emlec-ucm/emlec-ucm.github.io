@@ -4,31 +4,67 @@ on:
   workflow_dispatch:
     inputs:
       notification_type:
-        description: 'Type of notification to send'
-        required: false
-        default: 'announcement'
+        description: 'Tipo de notificación'
+        required: true
+        default: 'reminder'
         type: choice
         options:
-          - announcement
-          - reminder
+          - reminder       # recordatorio de la próxima sesión programada
+          - announcement   # aviso ("nueva sesión") de la próxima sesión programada
+      test:
+        description: 'Modo prueba: enviar solo a la cuenta del grupo'
+        required: false
+        default: false
+        type: boolean
   schedule:
-    - cron: '0 5 * * *'  # Daily at 5:00 UTC (8:00 AM Madrid winter, 9:00 AM Madrid summer)
+    # 05:00 UTC = 07:00 en Madrid en verano, 06:00 en invierno.
+    # GitHub suele retrasar los crons entre 1 y 3 horas, así que el correo
+    # llega normalmente entre las 7 y las 9 de la mañana.
+    - cron: '0 5 * * *'
+
+permissions:
+  contents: write   # necesario para el commit de keepalive
 
 jobs:
   send-notification:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # GitHub desactiva los workflows con "schedule" en repositorios públicos
+      # tras 60 días sin commits. Si el último commit tiene más de 50 días,
+      # este paso hace un commit vacío para reiniciar ese contador. Los commits
+      # hechos con GITHUB_TOKEN no disparan otros workflows, así que no se
+      # regenera la web ni se envía ningún correo por ello.
+      - name: Mantener activo el cron (keepalive)
+        if: github.event_name == 'schedule'
+        run: |
+          last=$(git log -1 --format=%ct)
+          days=$(( ( $(date +%s) - last ) / 86400 ))
+          echo "Último commit hace $days días."
+          if [ "$days" -ge 50 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit --allow-empty -m "chore: keepalive para que GitHub no desactive el cron de recordatorios"
+            git push
+            echo "Commit de keepalive enviado."
+          fi
 
       - name: Send email notification
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
-          TRIGGER_TYPE: ${{ github.event_name }}
-          NOTIFICATION_TYPE: ${{ github.event.inputs.notification_type || 'reminder' }}
+          NOTIFICATION_TYPE: ${{ inputs.notification_type }}
+          TEST_MODE: ${{ inputs.test }}
         run: |
-          python3 scripts/send_notification_standalone.py
+          EXTRA=""
+          if [ "$TEST_MODE" = "true" ]; then EXTRA="--test"; fi
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python3 scripts/tcg_mail.py remind --if-tomorrow
+          elif [ "$NOTIFICATION_TYPE" = "announcement" ]; then
+            python3 scripts/tcg_mail.py announce --force $EXTRA
+          else
+            python3 scripts/tcg_mail.py remind $EXTRA
+          fi

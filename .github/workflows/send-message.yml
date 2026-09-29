@@ -1,0 +1,78 @@
+name: Enviar mensaje a participantes
+
+# Envía por correo a los participantes de The Computational Garage el
+# contenido de un issue creado con la plantilla "Mensaje a los participantes".
+#
+# Flujo:
+#   1. Se crea el issue con la plantilla (queda con la etiqueta "mensaje").
+#      Crear el issue NO envía nada.
+#   2. Se añade la etiqueta "prueba"  -> se envía solo a la cuenta del grupo.
+#      Se añade la etiqueta "enviar"  -> se envía a todos los participantes
+#                                        y el issue se cierra.
+#
+# Solo actúa si quien creó el issue es miembro/colaborador del repositorio.
+# En un repositorio público cualquiera puede abrir issues, pero solo quien
+# tiene permisos puede poner etiquetas, así que nadie externo puede disparar
+# un envío.
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: mensaje-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  send:
+    if: >
+      github.event.issue.state == 'open' &&
+      (github.event.label.name == 'enviar' || github.event.label.name == 'prueba') &&
+      contains(github.event.issue.labels.*.name, 'mensaje') &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      LABEL: ${{ github.event.label.name }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Enviar el correo
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+          # Título y cuerpo del issue se pasan por variables de entorno (nunca
+          # interpolados en el script) para evitar inyección de comandos.
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          EXTRA=""
+          if [ "$LABEL" = "prueba" ]; then EXTRA="--test"; fi
+          python3 scripts/tcg_mail.py message --from-issue $EXTRA
+
+      - name: Anotar el resultado en el issue
+        if: success()
+        run: |
+          FECHA=$(TZ=Europe/Madrid date '+%d/%m/%Y %H:%M')
+          if [ "$LABEL" = "prueba" ]; then
+            gh issue comment "$ISSUE_NUMBER" --body "✅ **Prueba enviada** ($FECHA) solo a la cuenta de correo del grupo. Revísala y, si está bien, añade la etiqueta **enviar** para mandarla a todos los participantes. Si quieres cambiar algo, edita el issue y vuelve a poner **prueba**. ([log]($RUN_URL))"
+            gh issue edit "$ISSUE_NUMBER" --remove-label prueba
+          else
+            gh issue comment "$ISSUE_NUMBER" --body "✅ **Mensaje enviado a los participantes** ($FECHA). ([log]($RUN_URL))"
+            gh issue close "$ISSUE_NUMBER" --reason completed
+          fi
+
+      - name: Avisar del fallo en el issue
+        if: failure()
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --body "❌ **No se pudo enviar el mensaje.** Revisa el [log de la ejecución]($RUN_URL). Corrige lo necesario y vuelve a añadir la etiqueta **$LABEL** para reintentar."
+          gh issue edit "$ISSUE_NUMBER" --remove-label "$LABEL"

@@ -44,7 +44,7 @@ We need a small elisp script to setup and publish  it.
 				     :base-directory ,base-directory
 				     :base-extension "txt"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "docs\\|content\\|css\\|scripts\\|.git"
+				     :exclude "docs\\|content\\|css\\|scripts\\|requirements\\|.git"
 				     :recursive nil
 				     :publishing-function org-publish-attachment)
 
@@ -82,7 +82,7 @@ He excluido del proceso la generación de pdfs. El correspondiente código exclu
 User-agent: *
 Allow: /
 
-Sitemap: https://statespaceeconometrics-mlearning-rgroup.github.io/sitemap.xml
+Sitemap: https://emlec-ucm.github.io/sitemap.xml
 #+END_SRC
 
 ** COMMENT Commit and publish the html pages

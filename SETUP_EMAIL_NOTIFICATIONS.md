@@ -1,122 +1,140 @@
-# Configuración de Notificaciones por Email
+# Correos a los participantes de The Computational Garage
 
-Este documento describe cómo configurar las notificaciones automáticas por email usando **Gmail SMTP**.
+Guía para quienes tienen permisos en este repositorio. Explica qué correos se
+envían, cuándo, y cómo enviar uno a mano.
 
-## ¿Por qué Gmail?
-
-Gmail SMTP es una solución confiable y gratuita que permite:
-- ✅ Enviar hasta 500 emails por día
-- ✅ Enviar a múltiples destinatarios sin verificación de dominio
-- ✅ Usar autenticación segura con contraseñas de aplicación
-- ✅ No requiere configuración DNS
+Todos los correos salen desde la cuenta de Gmail del grupo (secret `EMAIL_USER`)
+a la lista de participantes (secret `EMAIL_RECIPIENTS`), siempre en **copia
+oculta**: ningún participante ve las direcciones de los demás.
 
 ---
 
-## Cuenta ya configurada
+## 1. Qué se envía automáticamente
 
-La cuenta **XXXcomputationalXXXXX@gmail.com** ya está configurada y lista para usar. Los mantenedores del repositorio tienen acceso a las credenciales.
+| Correo | Cuándo | Cómo se decide |
+|---|---|---|
+| **Nueva sesión** | Al hacer push a `main` | Se compara `content/TheComputationalGarage/sesiones.org` con el estado anterior al push. Por cada sesión **nueva con fecha futura** se envía un aviso. Añadir sesiones pasadas o corregir textos no envía nada. |
+| **Recordatorio** | Cada mañana (cron a las 05:00 UTC, es decir, entre las 7 y las 9 hora de Madrid según el retraso de GitHub) | Solo si hay una sesión programada **para mañana**. |
 
----
+Los datos de la sesión (fecha, hora, ponentes, lugar) se toman de `sesiones.org`:
 
-## GitHub Secrets Configurados
+```org
+** 2026-05-12
+   :PROPERTIES:
+   :SCHEDULED: <2026-05-12 Tue 11:30>
+   :SPEAKERS: Nombre del ponente
+   :LOCATION: Aula 302, Pabellón de Primero
+   :END:
 
-Los siguientes secrets ya están configurados en GitHub Actions:
+   - *Ponentes:* Nombre del ponente
+   - *Hora:* 11:30
+   - *Lugar:* Aula 302, Pabellón de Primero
+```
 
-| Secret | Descripción | Valor |
-|--------|-------------|-------|
-| `EMAIL_USER` | Dirección de Gmail | `XXXcomputationalXXXXX@gmail.com` |
-| `EMAIL_PASSWORD` | Contraseña de aplicación de Gmail | (16 caracteres - configurada) |
-| `EMAIL_RECIPIENTS` | Lista de destinatarios | Emails separados por comas |
-
----
-
-## Modificar la lista de destinatarios
-
-Para cambiar quién recibe las notificaciones:
-
-1. Ve a **Settings** del repositorio
-2. **Secrets and variables** → **Actions**
-3. Haz clic en **EMAIL_RECIPIENTS** → **Update secret**
-4. Modifica la lista de emails (formato: `email1@ucm.es,email2@ucm.es,email3@ucm.es`)
-5. **IMPORTANTE:** Sin espacios después de las comas
-6. Haz clic en **Update secret**
+La fecha se lee del título (`** YYYY-MM-DD`), ponentes y lugar de las
+propiedades `SPEAKERS` y `LOCATION`, y la hora de la línea `*Hora:*` (o, si
+falta, de `SCHEDULED`).
 
 ---
 
-## Cómo funciona
+## 2. Enviar un mensaje libre a los participantes
 
-Cada vez que se actualiza el archivo `content/TheComputationalGarage/sesiones.org` y la fecha de la primera sesión cambia:
+Sirve para cualquier aviso que no sea el anuncio de una sesión: cambio de aula,
+cancelación, convocatoria de ponentes, etc. Se redacta como un *issue* de
+GitHub y se envía poniéndole una etiqueta.
 
-1. GitHub Actions detecta el cambio automáticamente
-2. El script extrae los detalles de la sesión (fecha, ponentes, hora, lugar)
-3. Se envía un email HTML desde `XXXcomputationalXXXXX@gmail.com`
-4. Todos los emails en `EMAIL_RECIPIENTS` reciben la invitación
+1. Ve a **Issues → New issue** y elige la plantilla **"Mensaje a los participantes"**.
+2. En el **título**, escribe el asunto del correo después de `[Mensaje]`.
+   Ejemplo: `[Mensaje] Cambio de aula para la sesión de octubre`.
+3. En **Mensaje**, escribe el cuerpo. Admite Markdown (negritas, listas,
+   enlaces); la pestaña *Preview* muestra cómo quedará. No hace falta firmar:
+   la firma del grupo se añade sola al final.
+4. Si quieres que el correo incluya los datos de la próxima sesión programada,
+   marca la casilla de **Opciones**.
+5. Pulsa **Submit new issue**. **Esto no envía nada todavía.**
+6. Para revisar el correo, añade al issue la etiqueta **`prueba`**: en unos
+   segundos llega solo a la cuenta de Gmail del grupo, y el issue recibe un
+   comentario confirmándolo. Puedes editar el issue y repetir la prueba.
+7. Para enviarlo a todos, añade la etiqueta **`enviar`**. El issue recibe un
+   comentario con la hora del envío y se cierra automáticamente.
 
----
+Los issues cerrados con la etiqueta `mensaje` son el archivo de todo lo enviado.
 
-## Solución de problemas
+**Seguridad.** El envío solo se ejecuta si quien creó el issue es miembro o
+colaborador del repositorio y el issue tiene la etiqueta `mensaje`. Cualquiera
+puede abrir un issue en un repositorio público, pero solo quien tiene permisos
+puede poner etiquetas, así que nadie externo puede provocar un envío.
 
-### El email no se envió
-
-**Verifica:**
-1. Ve a **Actions** → última ejecución del workflow
-2. Expande el step "Enviar notificación de nueva sesión"
-3. Busca mensajes de error en los logs
-
-**Errores comunes:**
-- `[ERROR] SMTP error: (535, ...)` → Contraseña de aplicación incorrecta
-- `[ERROR] No valid recipient addresses found` → Lista de emails vacía o mal formateada
-- `[INFO] First session date unchanged` → La fecha de la sesión no cambió
-
-### Regenerar contraseña de aplicación
-
-Si es necesario crear una nueva contraseña de aplicación:
-
-1. Inicia sesión en Gmail con `XXXcomputationalXXXXX@gmail.com`
-2. Ve a **Cuenta de Google** → **Seguridad**
-3. **Verificación en dos pasos** → **Contraseñas de aplicaciones**
-4. Genera una nueva contraseña (16 caracteres)
-5. Actualiza el secret `EMAIL_PASSWORD` en GitHub
-6. Revoca la contraseña anterior
+**Si falla**, el issue recibe un comentario con el enlace al log y se retira la
+etiqueta. Corrige lo necesario y vuelve a ponerla.
 
 ---
 
-## Límites de Gmail
+## 3. Reenviar un anuncio o recordatorio a mano
 
-- **500 emails por día** (más que suficiente para este uso)
-- **100 destinatarios por email**
-- Retraso de ~1 segundo entre envíos
+Si hace falta repetir el aviso de la próxima sesión o mandar un recordatorio
+fuera del cron:
 
----
+1. Ve a **Actions → Send Email Notification → Run workflow**.
+2. Elige el tipo:
+   - **reminder**: recordatorio de la próxima sesión programada.
+   - **announcement**: aviso de "nueva sesión" para la próxima sesión programada.
+3. Marca **Modo prueba** si quieres que llegue solo a la cuenta del grupo.
+4. Pulsa **Run workflow**.
 
-## Enviar emails manualmente
-
-Puedes enviar emails sin modificar `sesiones.org` usando el workflow manual:
-
-1. Ve a **Actions** → **Send Email Notification**
-2. Haz clic en **Run workflow**
-3. Selecciona el tipo de notificación:
-   - **announcement**: Envía aviso de la sesión actual (primera sesión en `sesiones.org`)
-   - **reminder**: Envía recordatorio de la próxima sesión
-4. Haz clic en **Run workflow**
-
-El email se enviará en ~10 segundos (sin regenerar las páginas web).
+"Próxima sesión programada" es la de fecha más cercana igual o posterior a hoy.
+Si no hay ninguna, no se envía nada y el log lo indica.
 
 ---
 
-## Recordatorios automáticos
+## 4. Modificar la lista de destinatarios
 
-El sistema envía recordatorios automáticamente:
-
-- **Cuándo**: Todos los días a las 8:00 AM (hora de Madrid en invierno, 9:00 AM en verano)
-- **Condición**: Solo si hay una sesión programada para mañana
-- **Contenido**: Email de recordatorio con los detalles de la sesión
-
-Si no hay sesión mañana, no se envía ningún email.
+1. **Settings → Secrets and variables → Actions**.
+2. **EMAIL_RECIPIENTS → Update secret**.
+3. Escribe las direcciones separadas por comas (los espacios se ignoran).
+4. **Update secret**.
 
 ---
 
-## Información de contacto
+## 5. Cómo está montado
 
-Para problemas con la cuenta de Gmail o las notificaciones, contacta a los mantenedores del repositorio.
+| Fichero | Función |
+|---|---|
+| `scripts/tcg_mail.py` | Único script de correo. Subcomandos `announce`, `remind` y `message`. Opciones comunes `--test` (solo a la cuenta del grupo) y `--dry-run` (no envía; muestra el correo). |
+| `.github/workflows/publish.yml` | Genera la web al hacer push y ejecuta `announce --base <commit anterior>`. |
+| `.github/workflows/send-notification.yml` | Cron diario (`remind --if-tomorrow`) y ejecución manual (`remind` o `announce --force`). Incluye un paso *keepalive* (ver abajo). |
+| `.github/workflows/send-message.yml` | Envía el contenido de un issue al etiquetarlo con `prueba` o `enviar`. |
+| `.github/ISSUE_TEMPLATE/mensaje.yml` | Formulario del issue "Mensaje a los participantes". |
 
+Secrets necesarios: `EMAIL_USER` (Gmail del grupo), `EMAIL_PASSWORD`
+(contraseña de aplicación de 16 caracteres) y `EMAIL_RECIPIENTS`.
+
+**Keepalive.** GitHub desactiva los workflows con cron en repositorios públicos
+tras 60 días sin commits (ocurrió en julio de 2026). El workflow del cron hace
+ahora un commit vacío cuando el repositorio lleva 50 días sin actividad; ese
+commit no regenera la web ni envía correos. Si aun así el workflow apareciese
+como *disabled* en Actions, basta con abrirlo y pulsar **Enable workflow**.
+
+Para probar el script en local sin enviar nada:
+
+```bash
+EMAIL_USER=x EMAIL_PASSWORD=x EMAIL_RECIPIENTS=a@ucm.es \
+  python3 scripts/tcg_mail.py remind --dry-run
+```
+
+---
+
+## 6. Solución de problemas
+
+- **Un run en rojo.** El script falla (código 1) cuando faltan secrets o el
+  envío SMTP da error, para que se vea. Abre el run en Actions y busca la línea
+  `::error::` o `[ERROR]`.
+- `Error SMTP ... (535, ...)`: contraseña de aplicación incorrecta o revocada.
+  Genera otra en la cuenta de Gmail (Seguridad → Verificación en dos pasos →
+  Contraseñas de aplicaciones) y actualiza `EMAIL_PASSWORD`.
+- `No hay sesiones nuevas con fecha futura`: el push no añadió sesiones con
+  fecha posterior a hoy; es lo normal en la mayoría de los pushes.
+- **El cron no se ejecuta.** Comprueba en Actions que "Send Email
+  Notification" no está desactivado (ver *Keepalive*).
+- **Límites de Gmail:** 500 correos al día y 100 destinatarios por mensaje (el
+  script parte la lista en bloques de 80 si hiciera falta).
