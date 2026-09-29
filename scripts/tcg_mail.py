@@ -536,6 +536,15 @@ def send_email(subject, html_body, text_body, creds, audience="todos", test=Fals
         return False
     envelope = [user] if test else recipients
 
+    # Para que el workflow pueda citar los destinatarios en el comentario del issue
+    gh_output = os.environ.get("GITHUB_OUTPUT")
+    if gh_output:
+        labels = {"todos": "todos los participantes", "senior": "senior (incluidos los jefes)",
+                  "jefes": "solo los jefes", "junior": "solo los junior"}
+        with open(gh_output, "a", encoding="utf-8") as f:
+            f.write(f"audience={labels.get(audience, audience)}\n")
+            f.write(f"recipients={len(recipients)}\n")
+
     msg = MIMEMultipart("alternative")
     msg["From"] = formataddr((FROM_NAME, user))
     msg["To"] = formataddr((FROM_NAME, user))  # destinatarios reales en Bcc

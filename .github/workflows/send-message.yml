@@ -64,6 +64,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Enviar el correo
+        id: send
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
@@ -80,13 +81,17 @@ jobs:
 
       - name: Anotar el resultado en el issue
         if: success()
+        env:
+          AUDIENCE: ${{ steps.send.outputs.audience }}
+          RECIPIENTS: ${{ steps.send.outputs.recipients }}
         run: |
           FECHA=$(TZ=Europe/Madrid date '+%d/%m/%Y %H:%M')
+          DEST="**$AUDIENCE** ($RECIPIENTS direcciones)"
           if [ "$LABEL" = "prueba" ]; then
-            gh issue comment "$ISSUE_NUMBER" --body "✅ **Prueba enviada** ($FECHA) solo a la cuenta de correo del grupo. Revísala y, si está bien, añade la etiqueta **enviar** para mandarla a todos los participantes. Si quieres cambiar algo, edita el issue y vuelve a poner **prueba**. ([log]($RUN_URL))"
+            gh issue comment "$ISSUE_NUMBER" --body "✅ **Prueba enviada** ($FECHA) solo a la cuenta de correo del grupo. Revísala y, si está bien, añade la etiqueta **enviar** para mandarla a sus destinatarios: $DEST. Si quieres cambiar algo, edita el issue y vuelve a poner **prueba**. ([log]($RUN_URL))"
             gh issue edit "$ISSUE_NUMBER" --remove-label prueba
           else
-            gh issue comment "$ISSUE_NUMBER" --body "✅ **Mensaje enviado a los participantes** ($FECHA). ([log]($RUN_URL))"
+            gh issue comment "$ISSUE_NUMBER" --body "✅ **Mensaje enviado** ($FECHA) a $DEST. ([log]($RUN_URL))"
             gh issue close "$ISSUE_NUMBER" --reason completed
           fi
 
