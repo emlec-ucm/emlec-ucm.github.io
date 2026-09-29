@@ -60,10 +60,12 @@ GitHub y se envía poniéndole una etiqueta.
 
 Los issues cerrados con la etiqueta `mensaje` son el archivo de todo lo enviado.
 
-**Seguridad.** El envío solo se ejecuta si quien creó el issue es miembro o
-colaborador del repositorio y el issue tiene la etiqueta `mensaje`. Cualquiera
-puede abrir un issue en un repositorio público, pero solo quien tiene permisos
-puede poner etiquetas, así que nadie externo puede provocar un envío.
+**Seguridad.** Cualquiera puede abrir un issue en un repositorio público,
+pero solo quien tiene permisos (triage o superior) puede poner etiquetas. El
+workflow comprueba además, vía API, el permiso de quien puso la etiqueta, que
+el issue está abierto y que tiene la etiqueta `mensaje` (es decir, que se creó
+con la plantilla). Si algo no cuadra, lo explica en el log y en un comentario
+del issue.
 
 **Si falla**, el issue recibe un comentario con el enlace al log y se retira la
 etiqueta. Corrige lo necesario y vuelve a ponerla.
