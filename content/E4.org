@@ -1,6 +1,6 @@
 #+title: E4 Toolbox - MATLAB para series temporales (UCM)
 #+LANGUAGE: es
-#+OPTIONS: title:nil
+#+OPTIONS: title:nil toc:nil
 
 # Metadatos SEO para Google y otros buscadores
 #+HTML_HEAD: <meta name="description" content="E4 es una toolbox de MATLAB para modelización y análisis de series temporales mediante métodos de espacio de estados, desarrollada por el grupo EMLEC de la UCM.">
