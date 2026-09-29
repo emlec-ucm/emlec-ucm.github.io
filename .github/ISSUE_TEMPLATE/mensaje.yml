@@ -19,6 +19,8 @@ body:
 
         El correo lleva automáticamente la firma del grupo al final; no hace falta añadirla.
         Los issues cerrados quedan como archivo de los mensajes enviados.
+
+        ⚠️ **Este repositorio es público.** El issue, sus comentarios y su historial de ediciones son visibles para cualquiera en Internet, también después de cerrarlo. Escribe solo lo que pudiera leer una tercera persona. Si un mensaje no debe quedar a la vista, un administrador puede borrar el issue después del envío (menú "..." → Delete issue).
   - type: dropdown
     id: tipo
     attributes:

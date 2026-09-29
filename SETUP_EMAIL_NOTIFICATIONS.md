@@ -54,6 +54,18 @@ como un *issue* de GitHub y se envía poniéndole una etiqueta. Con la plantilla
 se pueden mandar tres tipos de correo, que se eligen en el desplegable **Tipo
 de mensaje**. Los pasos son distintos según el tipo; están en 2.1 y 2.2.
 
+> **Importante: todo lo que se escribe en un issue es público.** Este
+> repositorio es público, así que el issue, sus comentarios y su historial de
+> ediciones pueden leerse desde cualquier sitio de Internet, sin cuenta de
+> GitHub, y los buscadores los indexan. Cerrar el issue no lo oculta: los
+> issues cerrados siguen siendo visibles (y por eso sirven de archivo). El
+> asunto del correo aparece también en el log de la ejecución, que es
+> igualmente público. Escribe solo lo que pudiera leer una tercera persona:
+> nada de datos personales de participantes, ni valoraciones, ni información
+> interna del departamento. Si un mensaje ya enviado no debe quedar a la
+> vista, un administrador puede borrar el issue (menú "..." del issue →
+> *Delete issue*); desaparece del archivo.
+
 ### 2.1 Mensaje general (texto libre)
 
 Para cualquier aviso: cambio de aula, cancelación, convocatoria de ponentes...
@@ -257,3 +269,33 @@ EMAIL_USER=x EMAIL_PASSWORD=x EMAIL_RECIPIENTS=a@ucm.es \
   Notification" no está desactivado (ver *Keepalive*).
 - **Límites de Gmail:** 500 correos al día y 100 destinatarios por mensaje (el
   script parte la lista en bloques de 80 si hiciera falta).
+
+---
+
+## 7. Pendiente y comprobaciones (29/09/2026)
+
+Comprobaciones que solo pueden hacerse cuando ocurran:
+
+- [ ] **Primera ejecución del cron** con el sistema nuevo (30/09/2026 por la
+  mañana): el run de "Send Email Notification" debe salir en verde con
+  "No hay sesión mañana" en el log. El paso de keepalive solo hace algo cuando
+  el repositorio lleva 50 días sin commits.
+- [ ] **Primera sesión real del curso**: al añadirla a `sesiones.org` y hacer
+  push, el run de "Push Web Deploy" debe enviar el aviso a todos los
+  participantes. Mirar el log del paso "Enviar aviso de sesiones nuevas". Ese
+  camino se ha probado en simulación local, pero no con un envío real.
+- [ ] **Primer recordatorio automático** la víspera de esa sesión.
+
+Mejoras pendientes, no urgentes:
+
+- [ ] **Instalación de Emacs en cada publicación.** El workflow instala Emacs
+  con apt en cada push (varios minutos). Se puede cachear o usar una acción
+  que lo instale más rápido.
+- [ ] **Formulario sin etiquetas.** Sustituir las etiquetas `prueba`/`enviar`
+  por un desplegable "Acción" dentro del formulario. Descartado el 29/09/2026
+  por innecesario; se anota por si cambia de opinión.
+- [ ] **Mensajes confidenciales.** Si hiciera falta enviar mensajes que no
+  deban ser públicos, la solución estructural es mover el envío por issues a
+  un repositorio privado de la organización (los issues de un repositorio
+  privado solo los ven sus miembros). El workflow de ese repositorio leería
+  `sesiones.org` y la lista de participantes de este.

@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # GitHub desactiva los workflows con "schedule" en repositorios públicos
       # tras 60 días sin commits. Si el último commit tiene más de 50 días,

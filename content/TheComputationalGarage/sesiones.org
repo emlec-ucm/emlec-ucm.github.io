@@ -16,7 +16,7 @@
 ** 2026-05-12
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: session
-   :SCHEDULED: <2026-05-12 Thu 11:30>
+   :SCHEDULED: <2026-05-12 Tue 11:30>
    :SPEAKERS: Juan Manuel Sanchez Cartas
    :LOCATION: Aula 302, Pabellón de Primero
    :END:
@@ -29,7 +29,7 @@
 ** 2026-04-21
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: session
-   :SCHEDULED: <2026-04-21 Thu 11:30>
+   :SCHEDULED: <2026-04-21 Tue 11:30>
    :SPEAKERS: Daniel Bacaicoa Barber
    :LOCATION: Aula 302, Pabellón de Primero
    :END:
@@ -42,7 +42,7 @@
 ** 2026-03-24
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: session
-   :SCHEDULED: <2026-03-24 Thu 11:30>
+   :SCHEDULED: <2026-03-24 Tue 11:30>
    :SPEAKERS: Nicolás Bonino
    :LOCATION: Aula 302, Pabellón de Primero
    :END:
@@ -56,7 +56,7 @@
 ** 2026-03-17
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: session
-   :SCHEDULED: <2026-03-17 Thu 11:30>
+   :SCHEDULED: <2026-03-17 Tue 11:30>
    :SPEAKERS: David Suárez
    :LOCATION: Aula 302, Pabellón de Primero
    :END:
@@ -71,7 +71,7 @@
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: session
    :SPEAKERS: Almudena García Sanz; Young Kyu Hwang
-   :SCHEDULED: <2026-03-03 Thu 11:30>
+   :SCHEDULED: <2026-03-03 Tue 11:30>
    :LOCATION: Aula 302, Pabellón de Primero
    :END:
 
