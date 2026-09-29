@@ -14,8 +14,11 @@
 #+HTML_HEAD: <meta name="geo.placename" content="Madrid, España">
 #+HTML_HEAD: <style>.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }</style>
 
-# Sin tema: esta página usa solo simple.css (la hoja por defecto de publish.el),
-# más estrecha y con fondo oscuro si el sistema está en modo oscuro.
+# Sin tema: esta página usa solo simple.css, más estrecha y con fondo oscuro si
+# el sistema está en modo oscuro. Hay que enlazarla aquí porque las líneas
+# HTML_HEAD de arriba sustituyen la cabecera por defecto de publish.el.
+#+HTML_HEAD: <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+#+HTML_HEAD: <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 #+BEGIN_EXPORT html
 <h1 class="sr-only">E4 Toolbox - MATLAB para análisis de series temporales en espacio de estados (EMLEC - UCM)</h1>
