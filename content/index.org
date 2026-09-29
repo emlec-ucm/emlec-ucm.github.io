@@ -13,8 +13,8 @@
 #+HTML_HEAD: <meta property="og:description" content="Grupo de investigación de la Universidad Complutense de Madrid fundado en 2004. Investigación en series temporales, modelos factoriales dinámicos, predicción económica y machine learning.">
 #+HTML_HEAD: <meta property="og:type" content="website">
 #+HTML_HEAD: <meta property="og:url" content="https://emlec-ucm.github.io/index.html">
-#+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/emlec-alargado-luna.png">
-#+HTML_HEAD: <meta name="twitter:card" content="summary_large_image">
+#+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/emlec.jpeg">
+#+HTML_HEAD: <meta name="twitter:card" content="summary">
 #+HTML_HEAD: <meta name="geo.region" content="ES-MD">
 #+HTML_HEAD: <meta name="geo.placename" content="Madrid, España">
 #+HTML_HEAD: <style>.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }</style>

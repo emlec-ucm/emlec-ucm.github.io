@@ -29,7 +29,7 @@
 				    
 				    ("static-html"
 				     :base-directory ,(concat base-directory "content")
-				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|txt\\|svg\\|aiff\\|xml\\|html"
+				     :base-extension "css\\|js\\|png\\|jpe?g\\|gif\\|pdf\\|dat\\|mov\\|txt\\|svg\\|aiff\\|xml\\|html"
 				     :publishing-directory ,(concat base-directory "docs")
 				     :exclude "docs"
 				     :recursive t
