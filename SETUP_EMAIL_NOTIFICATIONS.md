@@ -75,11 +75,25 @@ Para cualquier aviso: cambio de aula, cancelación, convocatoria de ponentes...
    **solo a la cuenta de Gmail del grupo** (`thecomputationalgarage@gmail.com`,
    no a tu dirección personal) y el issue recibe un comentario confirmándolo.
    Si quieres cambiar algo, edita el issue y vuelve a poner `prueba`.
-7. Cuando esté bien, añade la etiqueta **`enviar`**. El correo sale a todos
-   los participantes, el issue recibe un comentario con la hora del envío y se
-   cierra solo.
+7. Cuando esté bien, añade la etiqueta **`enviar`**. El correo sale a los
+   destinatarios elegidos en el paso 2, el issue recibe un comentario con la
+   hora del envío y se cierra solo.
 
 Si prefieres no hacer prueba, puedes poner `enviar` directamente en el paso 6.
+
+**Qué dicen los comentarios del issue.** Tras la prueba, el comentario indica
+a quién irá el correo cuando pongas `enviar`; tras el envío, a quién ha ido.
+El número de direcciones es el real, contado tras descifrar la lista:
+
+| Destinatarios elegidos | Texto del comentario (recuentos de ejemplo) |
+|---|---|
+| Todos los participantes | ✅ **Prueba enviada** (29/09/2026 10:55) solo a la cuenta de correo del grupo. Revísala y, si está bien, añade la etiqueta **enviar** para mandarla a sus destinatarios: **todos los participantes** (23 direcciones). |
+| Senior (incluye a los jefes) | … para mandarla a sus destinatarios: **senior (incluidos los jefes)** (8 direcciones). |
+| Solo jefes | … para mandarla a sus destinatarios: **solo los jefes** (3 direcciones). |
+| Solo junior | … para mandarla a sus destinatarios: **solo los junior** (15 direcciones). |
+
+Y tras poner `enviar`, por ejemplo: ✅ **Mensaje enviado** (29/09/2026 11:02)
+a **senior (incluidos los jefes)** (8 direcciones).
 
 ### 2.2 Recordatorio de la próxima sesión, o aviso de nueva sesión
 
@@ -98,8 +112,9 @@ nada: ni asunto ni cuerpo.
 5. Añade la etiqueta **`prueba`** y pulsa **Submit new issue**. El correo
    llega solo a la cuenta de Gmail del grupo, y el issue recibe un comentario
    confirmándolo.
-6. Cuando esté bien, añade la etiqueta **`enviar`**. Sale a todos los
-   participantes y el issue se cierra solo.
+6. Cuando esté bien, añade la etiqueta **`enviar`**. Sale a los destinatarios
+   elegidos y el issue se cierra solo. Los comentarios del issue indican a
+   quién va, igual que en 2.1.
 
 "Próxima sesión programada" es la de fecha más cercana igual o posterior a
 hoy. Si no hay ninguna en `sesiones.org`, el envío falla y el issue recibe un
