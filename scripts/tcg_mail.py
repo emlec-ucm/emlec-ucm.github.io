@@ -25,10 +25,20 @@ Opciones comunes:
 Variables de entorno (GitHub Secrets):
   EMAIL_USER         Dirección de Gmail del grupo
   EMAIL_PASSWORD     Contraseña de aplicación de Gmail (16 caracteres)
-  EMAIL_RECIPIENTS   Destinatarios separados por comas
+  GENTE_PASSPHRASE   Frase de paso del fichero cifrado con la lista de
+                     participantes (RECIPIENTS_FILE, por defecto
+                     content/TheComputationalGarage/gente)
+  EMAIL_RECIPIENTS   Alternativa a lo anterior: destinatarios separados por
+                     comas (sin grupos). Solo se usa si no hay GENTE_PASSPHRASE.
 
 Opcionales:
   GH_TOKEN / GITHUB_TOKEN   Para convertir Markdown a HTML con la API de GitHub.
+
+Lista de participantes: el fichero es un org con una entrada cifrada por
+org-crypt (cifrado simétrico). Dentro del bloque cifrado, cada subencabezado
+org es un grupo (Jefes, Senior, Junior...) y debajo van las direcciones, una
+por línea (se ignoran comas, nombres y las líneas que empiezan por '#').
+Destinatarios posibles (--to): todos, senior (= Senior + Jefes), jefes, junior.
 
 Los destinatarios van siempre en copia oculta (Bcc): nadie ve la lista.
 El script termina con código 1 si algo falla (secrets ausentes, error SMTP),
@@ -51,6 +61,15 @@ from urllib import request
 from zoneinfo import ZoneInfo
 
 SESIONES_PATH = "content/TheComputationalGarage/sesiones.org"
+DEFAULT_RECIPIENTS_FILE = "content/TheComputationalGarage/gente"
+# Destinatario -> grupos del fichero que incluye (None = todos los grupos)
+AUDIENCES = {
+    "todos": None,
+    "senior": ["jefes", "senior"],
+    "jefes": ["jefes"],
+    "junior": ["junior"],
+}
+EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 WEB_URL = "https://emlec-ucm.github.io/TheComputationalGarage/sesiones.html"
 TZ = ZoneInfo("Europe/Madrid")
 FROM_NAME = "The Computational Garage"
@@ -350,15 +369,25 @@ def issue_kind(sections):
     return "general"
 
 
+def issue_audience(sections):
+    """Clave de AUDIENCES según el desplegable 'Destinatarios' del issue."""
+    value = sections.get("destinatarios", "").strip().lower()
+    for key in ("senior", "jefes", "junior"):
+        if value.startswith(key) or value.startswith("solo " + key):
+            return key
+    return "todos"
+
+
 def message_from_issue():
     """
-    Devuelve (kind, subject, text, include_session) a partir de ISSUE_TITLE e
-    ISSUE_BODY, o None si el issue no es válido.
+    Devuelve (kind, subject, text, include_session, audience) a partir de
+    ISSUE_TITLE e ISSUE_BODY, o None si el issue no es válido.
     """
     title = os.environ.get("ISSUE_TITLE", "")
     body = os.environ.get("ISSUE_BODY", "")
     sections = parse_issue_sections(body)
     kind = issue_kind(sections)
+    audience = issue_audience(sections)
     text = sections.get("mensaje")
     if text is None:
         text = body.strip()  # issue sin formulario: todo el cuerpo es el mensaje
@@ -373,30 +402,137 @@ def message_from_issue():
         if not text:
             error("El mensaje está vacío.")
             return None
-    return kind, subject, text, include_session
+    return kind, subject, text, include_session, audience
 
 
 # ---------------------------------------------------------------------------
 # Envío
 # ---------------------------------------------------------------------------
 
+def decrypt_pgp_block(path, passphrase):
+    """Descifra el bloque PGP (org-crypt, simétrico) contenido en `path`."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            lines = f.read().splitlines()
+    except FileNotFoundError:
+        error(f"No existe el fichero de participantes {path}")
+        return None
+    try:
+        start = next(i for i, l in enumerate(lines) if l.strip() == "-----BEGIN PGP MESSAGE-----")
+        end = next(i for i, l in enumerate(lines) if l.strip() == "-----END PGP MESSAGE-----")
+    except StopIteration:
+        error(f"{path} no contiene ningún bloque PGP cifrado.")
+        return None
+    block = "\n".join(lines[start:end + 1]) + "\n"
+
+    import tempfile
+    with tempfile.NamedTemporaryFile("w", delete=False, encoding="utf-8") as pf:
+        pf.write(passphrase)
+        pass_path = pf.name
+    try:
+        os.chmod(pass_path, 0o600)
+        result = subprocess.run(
+            ["gpg", "--batch", "--quiet", "--yes", "--pinentry-mode", "loopback",
+             "--passphrase-file", pass_path, "--decrypt"],
+            input=block, capture_output=True, text=True,
+        )
+    finally:
+        os.unlink(pass_path)
+    if result.returncode != 0:
+        detail = result.stderr.strip().splitlines()[-1] if result.stderr.strip() else "sin detalle"
+        error(f"No se pudo descifrar la lista de participantes (¿frase de paso incorrecta?): {detail}")
+        return None
+    return result.stdout
+
+
+def parse_groups(text):
+    """
+    Texto descifrado -> {grupo: [direcciones]}. Cada encabezado org abre un
+    grupo (nombre en minúsculas, sin etiquetas). Las direcciones anteriores a
+    cualquier encabezado van al grupo 'todos'. Se ignoran las líneas que
+    empiezan por '#'.
+    """
+    groups = {}
+    current = "todos"
+    for line in text.splitlines():
+        st = line.strip()
+        if not st or st.startswith("#"):
+            continue
+        m = re.match(r"^\*+\s+(.*?)(?:\s+:[\w:@]+:)?\s*$", st)
+        if m:
+            current = m.group(1).strip().lower()
+            groups.setdefault(current, [])
+            continue
+        for addr in EMAIL_RE.findall(st):
+            groups.setdefault(current, [])
+            if addr.lower() not in (a.lower() for a in groups[current]):
+                groups[current].append(addr)
+    return {g: addrs for g, addrs in groups.items() if addrs}
+
+
 def load_credentials():
     user = os.environ.get("EMAIL_USER", "").strip()
     password = os.environ.get("EMAIL_PASSWORD", "")
-    recipients_raw = os.environ.get("EMAIL_RECIPIENTS", "")
-    missing = [n for n, v in (("EMAIL_USER", user), ("EMAIL_PASSWORD", password), ("EMAIL_RECIPIENTS", recipients_raw)) if not v]
+    missing = [n for n, v in (("EMAIL_USER", user), ("EMAIL_PASSWORD", password)) if not v]
     if missing:
         error(f"Faltan variables de entorno: {', '.join(missing)}. Configura los GitHub Secrets.")
         return None
-    recipients = [r.strip() for r in re.split(r"[,;\s]+", recipients_raw) if r.strip()]
-    if not recipients:
-        error("EMAIL_RECIPIENTS no contiene ninguna dirección.")
+
+    passphrase = os.environ.get("GENTE_PASSPHRASE", "")
+    if passphrase:
+        path = os.environ.get("RECIPIENTS_FILE", DEFAULT_RECIPIENTS_FILE)
+        text = decrypt_pgp_block(path, passphrase)
+        if text is None:
+            return None
+        groups = parse_groups(text)
+        source = path
+    else:
+        recipients_raw = os.environ.get("EMAIL_RECIPIENTS", "")
+        if not recipients_raw:
+            error("Faltan GENTE_PASSPHRASE (lista cifrada) o EMAIL_RECIPIENTS. Configura los GitHub Secrets.")
+            return None
+        groups = {"todos": [r for r in re.split(r"[,;\s]+", recipients_raw) if r.strip()]}
+        source = "EMAIL_RECIPIENTS"
+    if not groups:
+        error(f"La lista de participantes ({source}) no contiene ninguna dirección.")
         return None
-    return user, password, recipients
+    info("Lista de participantes leída de " + source + ": "
+         + ", ".join(f"{g} {len(a)}" for g, a in groups.items())
+         + f" (total {sum(len(a) for a in groups.values())}).")
+    return user, password, groups
 
 
-def send_email(subject, html_body, text_body, creds, test=False, dry_run=False):
-    user, password, recipients = creds
+def select_recipients(groups, audience):
+    """Direcciones (sin duplicados) para un destinatario de AUDIENCES."""
+    if audience not in AUDIENCES:
+        error(f"Destinatario desconocido: {audience}. Opciones: {', '.join(AUDIENCES)}.")
+        return None
+    wanted = AUDIENCES[audience]
+    if wanted is None:
+        chosen = list(groups)
+    else:
+        chosen = [g for g in wanted if g in groups]
+        missing = [g for g in wanted if g not in groups]
+        if missing:
+            warn(f"Grupos no encontrados en la lista: {', '.join(missing)}.")
+    seen, recipients = set(), []
+    for g in chosen:
+        for addr in groups[g]:
+            if addr.lower() not in seen:
+                seen.add(addr.lower())
+                recipients.append(addr)
+    if not recipients:
+        error(f"No hay ninguna dirección para el destinatario '{audience}'.")
+        return None
+    info(f"Destinatario '{audience}': grupos {', '.join(chosen) or '-'} ({len(recipients)} direcciones).")
+    return recipients
+
+
+def send_email(subject, html_body, text_body, creds, audience="todos", test=False, dry_run=False):
+    user, password, groups = creds
+    recipients = select_recipients(groups, audience)
+    if recipients is None:
+        return False
     envelope = [user] if test else recipients
 
     msg = MIMEMultipart("alternative")
@@ -498,7 +634,7 @@ def cmd_message(args, creds):
         parsed = message_from_issue()
         if parsed is None:
             return 1
-        kind, subject, body, include_session_issue = parsed
+        kind, subject, body, include_session_issue, audience = parsed
         include_session = include_session or include_session_issue
         if kind != "general":
             s = next_session(read_sessions() or [])
@@ -511,8 +647,9 @@ def cmd_message(args, creds):
                 mail = build_reminder(s, s["date_obj"] == today_madrid() + timedelta(days=1), note=body)
             else:
                 mail = build_announcement(s, note=body)
-            return 0 if send_email(*mail, creds, test=args.test, dry_run=args.dry_run) else 1
+            return 0 if send_email(*mail, creds, audience=audience, test=args.test, dry_run=args.dry_run) else 1
     else:
+        audience = args.to
         subject = args.subject
         if args.body_file:
             with open(args.body_file, encoding="utf-8") as f:
@@ -530,7 +667,7 @@ def cmd_message(args, creds):
         if not session:
             warn("Se pidió incluir la próxima sesión pero no hay ninguna programada.")
 
-    ok = send_email(*build_message(subject, body, session), creds, test=args.test, dry_run=args.dry_run)
+    ok = send_email(*build_message(subject, body, session), creds, audience=audience, test=args.test, dry_run=args.dry_run)
     return 0 if ok else 1
 
 
@@ -558,6 +695,8 @@ def main(argv=None):
     src.add_argument("--body-env", default="MESSAGE_BODY", help="variable de entorno con el cuerpo (por defecto MESSAGE_BODY)")
     src.add_argument("--from-issue", action="store_true", help="leer asunto y cuerpo de ISSUE_TITLE / ISSUE_BODY")
     p.add_argument("--include-session", action="store_true", help="añadir los datos de la próxima sesión")
+    p.add_argument("--to", default="todos", choices=list(AUDIENCES),
+                   help="destinatarios (por defecto todos; con --from-issue se lee del issue)")
     p.set_defaults(func=cmd_message)
 
     args = parser.parse_args(argv)

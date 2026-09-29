@@ -46,4 +46,6 @@ jobs:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+          GENTE_PASSPHRASE: ${{ secrets.GENTE_PASSPHRASE }}
+          RECIPIENTS_FILE: content/TheComputationalGarage/gente
         run: python3 scripts/tcg_mail.py announce --base "${{ github.event.before }}"

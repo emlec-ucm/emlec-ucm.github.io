@@ -4,8 +4,9 @@ Guía para quienes tienen permisos en este repositorio. Explica qué correos se
 envían, cuándo, y cómo enviar uno a mano.
 
 Todos los correos salen desde la cuenta de Gmail del grupo (secret `EMAIL_USER`)
-a la lista de participantes (secret `EMAIL_RECIPIENTS`), siempre en **copia
-oculta**: ningún participante ve las direcciones de los demás.
+a la lista de participantes (fichero cifrado `content/TheComputationalGarage/gente`,
+ver sección 4), siempre en **copia oculta**: ningún participante ve las
+direcciones de los demás.
 
 ## Tipos de mensajes
 
@@ -59,6 +60,9 @@ Para cualquier aviso: cambio de aula, cancelación, convocatoria de ponentes...
 
 1. Ve a **Issues → New issue** y elige la plantilla **"Mensaje a los participantes"**.
 2. En **Tipo de mensaje**, deja **"Mensaje general"** (es la opción por defecto).
+   En **Destinatarios**, elige a quién va: todos los participantes (por
+   defecto), senior (que incluye siempre a los jefes), solo jefes o solo
+   junior. Los grupos son los del fichero de participantes (sección 4).
 3. En el **título**, escribe el asunto del correo después de `[Mensaje]`.
    Ejemplo: `[Mensaje] Cambio de aula para la sesión de octubre`.
 4. En **Mensaje**, escribe el cuerpo. Admite Markdown (negritas, listas,
@@ -86,7 +90,7 @@ nada: ni asunto ni cuerpo.
 
 1. Ve a **Issues → New issue** y elige la plantilla **"Mensaje a los participantes"**.
 2. En **Tipo de mensaje**, elige **"Recordatorio de la próxima sesión"** o
-   **"Aviso de nueva sesión"**.
+   **"Aviso de nueva sesión"**. En **Destinatarios**, normalmente "Todos".
 3. Deja el **título** tal cual (`[Mensaje] `): en estos dos tipos no se usa.
 4. Deja el campo **Mensaje** vacío. Si escribes algo, se añade al correo como
    párrafo después de los datos de la sesión (por ejemplo, "esta vez
@@ -141,12 +145,53 @@ Si no hay ninguna, no se envía nada y el log lo indica.
 
 ---
 
-## 4. Modificar la lista de destinatarios
+## 4. La lista de participantes
 
-1. **Settings → Secrets and variables → Actions**.
-2. **EMAIL_RECIPIENTS → Update secret**.
-3. Escribe las direcciones separadas por comas (los espacios se ignoran).
-4. **Update secret**.
+La lista vive en el fichero `content/TheComputationalGarage/gente`, un fichero
+org con una entrada cifrada con **org-crypt** (cifrado simétrico). La frase de
+paso está guardada en el secret `GENTE_PASSPHRASE`; con ella, los workflows
+descifran el fichero en cada envío. No hay ninguna otra copia de la lista.
+
+Estructura del contenido cifrado: un subencabezado por grupo y, debajo, una
+dirección por línea. Las comas, los nombres y las líneas que empiezan por `#`
+se ignoran (sirve para dejar a alguien apuntado sin que reciba correos).
+
+```org
+* Lista :crypt:
+** Jefes
+   nombre1@ucm.es,
+** Senior
+   nombre2@ucm.es,
+   # nombre3@ucm.es,   <- de baja temporal: no recibe correos
+** Junior
+   nombre4@ucm.es,
+```
+
+Destinatarios posibles en los envíos: **todos** (los tres grupos), **senior**
+(Senior más Jefes), **jefes** y **junior**. Los correos automáticos van
+siempre a todos. Si se añade un grupo nuevo en el fichero, hay que añadir la
+opción en el formulario del issue (`.github/ISSUE_TEMPLATE/mensaje.yml`) y en
+`AUDIENCES` de `scripts/tcg_mail.py`.
+
+**Añadir o quitar a alguien**, desde Emacs:
+
+1. Abre `content/TheComputationalGarage/gente`.
+2. Sitúate en la entrada `* Lista` y ejecuta `M-x org-decrypt-entry` (pide la
+   frase de paso).
+3. Edita las direcciones.
+4. Guarda: org-crypt vuelve a cifrar la entrada automáticamente al guardar.
+   Comprueba que en el fichero vuelve a aparecer `-----BEGIN PGP MESSAGE-----`.
+5. Commit y push. No hay que tocar ningún secret.
+
+En el log de cada envío aparece cuántas direcciones se han leído de cada grupo
+(nunca las direcciones), para comprobar que el fichero se ha descifrado bien.
+Si la frase de paso cambia, hay que actualizar el secret `GENTE_PASSPHRASE`.
+
+El fichero no tiene extensión `.org` a propósito: los `.org` de `content/` se
+exportan a la web, y este no debe publicarse.
+
+Si `GENTE_PASSPHRASE` no está definido, el script usa el secret
+`EMAIL_RECIPIENTS` (lista separada por comas, sin grupos) como alternativa.
 
 ---
 
@@ -161,7 +206,8 @@ Si no hay ninguna, no se envía nada y el log lo indica.
 | `.github/ISSUE_TEMPLATE/mensaje.yml` | Formulario del issue "Mensaje a los participantes". |
 
 Secrets necesarios: `EMAIL_USER` (Gmail del grupo), `EMAIL_PASSWORD`
-(contraseña de aplicación de 16 caracteres) y `EMAIL_RECIPIENTS`.
+(contraseña de aplicación de 16 caracteres) y `GENTE_PASSPHRASE` (frase de
+paso del fichero de participantes).
 
 **Keepalive.** GitHub desactiva los workflows con cron en repositorios públicos
 tras 60 días sin commits (ocurrió en julio de 2026). El workflow del cron hace
@@ -188,6 +234,9 @@ EMAIL_USER=x EMAIL_PASSWORD=x EMAIL_RECIPIENTS=a@ucm.es \
   Contraseñas de aplicaciones) y actualiza `EMAIL_PASSWORD`.
 - `No hay sesiones nuevas con fecha futura`: el push no añadió sesiones con
   fecha posterior a hoy; es lo normal en la mayoría de los pushes.
+- `No se pudo descifrar la lista de participantes`: la frase de paso del
+  secret `GENTE_PASSPHRASE` no coincide con la del fichero, o el fichero se
+  guardó sin cifrar (comprueba que contiene `-----BEGIN PGP MESSAGE-----`).
 - **El cron no se ejecuta.** Comprueba en Actions que "Send Email
   Notification" no está desactivado (ver *Keepalive*).
 - **Límites de Gmail:** 500 correos al día y 100 destinatarios por mensaje (el

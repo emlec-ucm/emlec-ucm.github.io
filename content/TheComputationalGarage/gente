@@ -24,17 +24,17 @@
 
 =M-x org-encrypt-entry= para encriptar
 
-- F Encestar bolitas de pappel 3
+- F Encestar bolitas de pappel 3 (mecánicos ¿de qué categoría?
 
 * Lista :crypt:
-
 -----BEGIN PGP MESSAGE-----
 
-jA0ECQMCaFG05ESNjSL/0sAyAR+xzIrGfNFyKkHvmH2xbN43lP8Y6bEUNhjAADhC
-0Vn/Uq9+/xcZ2+3w+HChhi6zWVDc7oOPUHk+OPi67qxcoDuAhaUOZ8PvPy7KHepM
-RzALZMyD3CN52ypoCXdgBTq++ldbO14mEvgyg7pjjU1T0zjUd7D93m+O16Onx4v1
-/bve0yroakIXf8L7sx33+08wskE1hQJOCV3PSKRlPSgQQcnP5DFoE4gIn3n1ZI7Y
-8niyR4/o7tmHw2HDf2muET5dvMvX4AjeKpbhqNNTqW/j8d3cOv9UVtv5BOp+MK7I
-zMVgmRlncsp4wK7pAXd4WHf7OEw=
-=gqu6
+jA0ECQMCGmwPXgoxDJz/0sBWAe9hTZewUW2fSLtcEjg5cPYPDmY7b7OA9q52C1Fg
+3B/wbkv3TXoLJo4PQbbBlerBkatxTopJL7TUMBTpHZusTdl9i7a2DeXu9TX31a1y
+gCtOY+E4nvVPy/QozQEhObgSCU/MSl0YKDhoGV8uen+cDchguargkEDVca8aiOye
+bSsEA7hBiS7j0YB0wzHXLPVUhgjjQ5vMca3Ywg3Ad8zVHqyees6Zb2yLso9CRcMy
+xSMgWf0P0MDtoJAk8gQi4IgPxh14yyiSeexo1He4Sb2iEocVCDc4MZsRnqfYwhh5
+NOHDneAMRZtr86FCTVMByNznNuF0+j3KVYuC9PlJk4FH4xEBigkfLC4jnwxElvxH
+bkkVz2XuyF8=
+=yZJ9
 -----END PGP MESSAGE-----
