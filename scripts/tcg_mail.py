@@ -13,7 +13,10 @@ send_session_notification.py y send_notification_standalone.py):
   message    Mensaje libre: asunto + cuerpo (Markdown). El cuerpo puede venir
              de un fichero (--body-file), de una variable de entorno
              (--body-env) o de un issue de GitHub (--from-issue, que lee
-             ISSUE_TITLE e ISSUE_BODY).
+             ISSUE_TITLE e ISSUE_BODY). Si el issue indica como tipo de
+             mensaje "recordatorio" o "aviso de nueva sesión", se envía esa
+             plantilla para la próxima sesión programada, con el texto del
+             issue (si lo hay) como párrafo adicional.
 
 Opciones comunes:
   --test      Envía SOLO a la cuenta del grupo (EMAIL_USER), para revisar.
@@ -233,22 +236,31 @@ WEB_LINK_TEXT = f"Podéis consultar el histórico completo de sesiones en:\n{WEB
 # Plantillas
 # ---------------------------------------------------------------------------
 
-def build_announcement(s):
+def _note_parts(note):
+    """Párrafo adicional opcional (Markdown) para anuncios y recordatorios."""
+    if not note or not note.strip():
+        return "", ""
+    return markdown_to_html(note), note.strip() + "\n\n"
+
+
+def build_announcement(s, note=None):
+    note_html, note_text = _note_parts(note)
     subject = f"Nueva sesión de The Computational Garage - {format_date_short(s['date_obj'])}"
     html_body = wrap_html(
         "<p>Estimados/as compañeros/as,</p>"
         "<p>Os invitamos cordialmente a asistir a la próxima sesión de <strong>The Computational Garage</strong>:</p>"
-        + session_table_html(s) + WEB_LINK_HTML + "<p>¡Os esperamos!</p>"
+        + session_table_html(s) + note_html + WEB_LINK_HTML + "<p>¡Os esperamos!</p>"
     )
     text_body = wrap_text(
         "Estimados/as compañeros/as,\n\n"
         "Os invitamos cordialmente a asistir a la próxima sesión de The Computational Garage:\n\n"
-        + session_table_text(s) + "\n\n" + WEB_LINK_TEXT + "\n\n¡Os esperamos!"
+        + session_table_text(s) + "\n\n" + note_text + WEB_LINK_TEXT + "\n\n¡Os esperamos!"
     )
     return subject, html_body, text_body
 
 
-def build_reminder(s, is_tomorrow):
+def build_reminder(s, is_tomorrow, note=None):
+    note_html, note_text = _note_parts(note)
     if is_tomorrow:
         subject = "Recordatorio - Sesión de The Computational Garage mañana"
         when_html = "<strong>MAÑANA</strong>"
@@ -260,12 +272,12 @@ def build_reminder(s, is_tomorrow):
     html_body = wrap_html(
         "<p>Estimados/as compañeros/as,</p>"
         f"<p>Os recordamos que {when_html} tendremos sesión de <strong>The Computational Garage</strong>:</p>"
-        + session_table_html(s) + "<p>¡No lo olvidéis!</p>" + WEB_LINK_HTML
+        + session_table_html(s) + note_html + "<p>¡No lo olvidéis!</p>" + WEB_LINK_HTML
     )
     text_body = wrap_text(
         "Estimados/as compañeros/as,\n\n"
         f"Os recordamos que {when_text} tendremos sesión de The Computational Garage:\n\n"
-        + session_table_text(s) + "\n\n¡No lo olvidéis!\n\n" + WEB_LINK_TEXT
+        + session_table_text(s) + "\n\n" + note_text + "¡No lo olvidéis!\n\n" + WEB_LINK_TEXT
     )
     return subject, html_body, text_body
 
@@ -328,23 +340,40 @@ def parse_issue_sections(body):
     return out
 
 
+def issue_kind(sections):
+    """'general', 'reminder' o 'announcement' según el desplegable 'Tipo de mensaje'."""
+    value = sections.get("tipo de mensaje", "").strip().lower()
+    if value.startswith("recordatorio"):
+        return "reminder"
+    if value.startswith("aviso"):
+        return "announcement"
+    return "general"
+
+
 def message_from_issue():
+    """
+    Devuelve (kind, subject, text, include_session) a partir de ISSUE_TITLE e
+    ISSUE_BODY, o None si el issue no es válido.
+    """
     title = os.environ.get("ISSUE_TITLE", "")
     body = os.environ.get("ISSUE_BODY", "")
-    subject = ISSUE_TITLE_PREFIX_RE.sub("", title).strip()
-    if not subject:
-        error("El título del issue está vacío: escribe el asunto tras '[Mensaje]'.")
-        return None
     sections = parse_issue_sections(body)
+    kind = issue_kind(sections)
     text = sections.get("mensaje")
     if text is None:
         text = body.strip()  # issue sin formulario: todo el cuerpo es el mensaje
-    if not text:
-        error("El mensaje está vacío.")
-        return None
     options = sections.get("opciones", "")
     include_session = bool(re.search(r"^\s*-\s*\[[xX]\]\s*Incluir", options, re.MULTILINE))
-    return subject, text, include_session
+
+    subject = ISSUE_TITLE_PREFIX_RE.sub("", title).strip()
+    if kind == "general":
+        if not subject:
+            error("El título del issue está vacío: escribe el asunto tras '[Mensaje]'.")
+            return None
+        if not text:
+            error("El mensaje está vacío.")
+            return None
+    return kind, subject, text, include_session
 
 
 # ---------------------------------------------------------------------------
@@ -469,8 +498,20 @@ def cmd_message(args, creds):
         parsed = message_from_issue()
         if parsed is None:
             return 1
-        subject, body, include_session_issue = parsed
+        kind, subject, body, include_session_issue = parsed
         include_session = include_session or include_session_issue
+        if kind != "general":
+            s = next_session(read_sessions() or [])
+            if not s:
+                error("No hay ninguna sesión futura en sesiones.org: no se puede enviar un "
+                      f"{'recordatorio' if kind == 'reminder' else 'aviso de nueva sesión'}.")
+                return 1
+            info(f"Tipo de mensaje: {kind}; próxima sesión: {s['date']}.")
+            if kind == "reminder":
+                mail = build_reminder(s, s["date_obj"] == today_madrid() + timedelta(days=1), note=body)
+            else:
+                mail = build_announcement(s, note=body)
+            return 0 if send_email(*mail, creds, test=args.test, dry_run=args.dry_run) else 1
     else:
         subject = args.subject
         if args.body_file:

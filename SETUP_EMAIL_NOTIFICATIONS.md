@@ -14,7 +14,7 @@ oculta**: ningún participante ve las direcciones de los demás.
 | **Nueva sesión** (aviso con fecha, hora, ponente y lugar) | Automático, al añadir la sesión en `sesiones.org` y hacer push | Sección 1 |
 | **Recordatorio** ("mañana hay sesión") | Automático, cada mañana si hay sesión al día siguiente | Sección 1 |
 | **Mensaje general** (cualquier aviso: cambio de aula, cancelación, convocatoria de ponentes...) | A mano, redactándolo como issue | Sección 2 |
-| **Reenvío manual** del aviso de nueva sesión o del recordatorio de la próxima sesión | A mano, desde Actions | Sección 3 |
+| **Reenvío manual** del aviso de nueva sesión o del recordatorio de la próxima sesión | A mano, desde un issue (con el paso de prueba y archivo) o desde Actions (dos clics, sin prueba) | Secciones 2 y 3 |
 
 ---
 
@@ -46,20 +46,35 @@ falta, de `SCHEDULED`).
 
 ---
 
-## 2. Enviar un mensaje libre a los participantes
+## 2. Enviar un mensaje desde un issue
 
-Sirve para cualquier aviso que no sea el anuncio de una sesión: cambio de aula,
-cancelación, convocatoria de ponentes, etc. Se redacta como un *issue* de
-GitHub y se envía poniéndole una etiqueta.
+Es el procedimiento general para cualquier envío manual. El mensaje se redacta
+como un *issue* de GitHub y se envía poniéndole una etiqueta. Sirve para tres
+tipos de correo, que se eligen en el desplegable **Tipo de mensaje** del
+formulario:
+
+- **Mensaje general**: cualquier aviso (cambio de aula, cancelación,
+  convocatoria de ponentes...). Escribes tú el asunto y el cuerpo.
+- **Recordatorio de la próxima sesión**: el correo de recordatorio de siempre,
+  generado con los datos de la próxima sesión programada en `sesiones.org`.
+- **Aviso de nueva sesión**: el correo de "nueva sesión", generado igual.
+
+Pasos:
 
 1. Ve a **Issues → New issue** y elige la plantilla **"Mensaje a los participantes"**.
-2. En el **título**, escribe el asunto del correo después de `[Mensaje]`.
-   Ejemplo: `[Mensaje] Cambio de aula para la sesión de octubre`.
-3. En **Mensaje**, escribe el cuerpo. Admite Markdown (negritas, listas,
-   enlaces); la pestaña *Preview* muestra cómo quedará. No hace falta firmar:
-   la firma del grupo se añade sola al final.
-4. Si quieres que el correo incluya los datos de la próxima sesión programada,
-   marca la casilla de **Opciones**.
+2. Elige el **Tipo de mensaje**.
+3. Para el **mensaje general**, escribe el asunto en el **título** después de
+   `[Mensaje]` (ejemplo: `[Mensaje] Cambio de aula para la sesión de octubre`)
+   y el cuerpo en **Mensaje**. Admite Markdown (negritas, listas, enlaces); la
+   pestaña *Preview* muestra cómo quedará. No hace falta firmar: la firma del
+   grupo se añade sola al final. Si quieres que el correo incluya los datos de
+   la próxima sesión programada, marca la casilla de **Opciones**.
+4. Para el **recordatorio** o el **aviso de nueva sesión**, el asunto y el
+   cuerpo se generan solos y el título del issue no se usa. El campo
+   **Mensaje** es opcional: si escribes algo, se añade como párrafo después de
+   los datos de la sesión (por ejemplo, "esta vez empezamos a las 12:00"). Si
+   no hay ninguna sesión futura en `sesiones.org`, el envío falla y lo indica
+   en un comentario del issue.
 5. Pulsa **Submit new issue**. **Esto no envía nada todavía.**
 6. Para revisar el correo, añade al issue la etiqueta **`prueba`**: en unos
    segundos llega solo a la cuenta de Gmail del grupo
@@ -89,11 +104,11 @@ etiqueta. Corrige lo necesario y vuelve a ponerla.
 
 ---
 
-## 3. Reenviar un anuncio o recordatorio a mano
+## 3. Reenviar un anuncio o recordatorio desde Actions
 
-Estos dos mensajes tienen su texto fijo y toman los datos de `sesiones.org`,
-por eso **no se hacen desde un issue sino desde Actions**. Sirven para repetir
-el aviso de la próxima sesión o mandar un recordatorio fuera del cron:
+Alternativa rápida al issue para el recordatorio y el aviso de nueva sesión:
+dos clics, pero sin paso de prueba previo y sin archivo (solo queda el log del
+run). Ambos caminos conviven; usa el que prefieras.
 
 1. Ve a **Actions → Send Email Notification → Run workflow**.
 2. Elige el tipo:

@@ -7,31 +7,43 @@ body:
     attributes:
       value: |
         ### Cómo funciona
-        1. Escribe el **asunto** del correo en el título, después de `[Mensaje]`.
-        2. Escribe el **cuerpo** abajo (admite Markdown: negritas, listas, enlaces...).
-        3. Crea el issue. **Crear el issue no envía nada.**
-        4. Para revisarlo primero, añade la etiqueta **`prueba`**: se envía solo a la cuenta de correo del grupo (no a tu dirección personal).
-        5. Para enviarlo a todos los participantes, añade la etiqueta **`enviar`**. El issue se cerrará solo.
+        1. Elige el **tipo de mensaje**.
+           - **Mensaje general**: escribes tú el asunto (en el título, después de `[Mensaje]`) y el cuerpo.
+           - **Recordatorio** o **Aviso de nueva sesión**: el correo se genera solo con los datos de la próxima sesión programada en `sesiones.org` (asunto incluido). El título del issue no se usa, y el campo Mensaje es opcional: si escribes algo, se añade como párrafo después de los datos de la sesión.
+        2. Crea el issue. **Crear el issue no envía nada.**
+        3. Para revisarlo primero, añade la etiqueta **`prueba`**: se envía solo a la cuenta de correo del grupo (no a tu dirección personal).
+        4. Para enviarlo a todos los participantes, añade la etiqueta **`enviar`**. El issue se cerrará solo.
 
         Las etiquetas se eligen en el menú desplegable **Labels** de la última fila de esta ventana, al crear el issue o más tarde desde la página del issue.
 
         El correo lleva automáticamente la firma del grupo al final; no hace falta añadirla.
         Los issues cerrados quedan como archivo de los mensajes enviados.
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de mensaje
+      options:
+        - Mensaje general (asunto y cuerpo escritos por ti)
+        - Recordatorio de la próxima sesión (generado con los datos de sesiones.org)
+        - Aviso de nueva sesión (generado con los datos de sesiones.org)
+      default: 0
+    validations:
+      required: true
   - type: textarea
     id: mensaje
     attributes:
       label: Mensaje
-      description: Cuerpo del correo. Puedes usar la pestaña "Preview" para ver cómo queda.
+      description: Cuerpo del correo (obligatorio en el mensaje general; opcional en los otros dos). Admite Markdown; la pestaña "Preview" muestra cómo queda.
       placeholder: |
         Hola a todos,
 
         ...
     validations:
-      required: true
+      required: false
   - type: checkboxes
     id: opciones
     attributes:
       label: Opciones
       options:
-        - label: Incluir los datos de la próxima sesión programada (fecha, hora, ponente y lugar, tomados de sesiones.org)
+        - label: Incluir en el mensaje general los datos de la próxima sesión programada (fecha, hora, ponente y lugar)
           required: false
