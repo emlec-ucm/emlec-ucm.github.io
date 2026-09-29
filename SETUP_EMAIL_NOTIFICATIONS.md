@@ -66,6 +66,25 @@ de mensaje**. Los pasos son distintos según el tipo; están en 2.1 y 2.2.
 > vista, un administrador puede borrar el issue (menú "..." del issue →
 > *Delete issue*); desaparece del archivo.
 
+**Qué es público y qué no**, en cualquiera de los caminos de envío:
+
+| Dato | ¿Público? | Dónde |
+|---|---|---|
+| Texto de un mensaje general (issue) | **Sí, de forma permanente** | En el issue, también cerrado, con su historial de ediciones |
+| Asunto del correo | Sí, 90 días | En el log del run (GitHub borra los logs a los 90 días) |
+| Tipo de envío, modo prueba, fecha | Sí, 90 días | En el log del run |
+| Contenido de recordatorios y avisos | Ya lo era | Son los datos de `sesiones.org`, publicados en la web |
+| Grupo elegido y número de direcciones (p. ej. "solo los jefes (3 direcciones)"), recuento por grupo | Sí | En el comentario del issue y en el log |
+| **Direcciones de los participantes** | **Nunca** | Van en copia oculta; no se imprimen en logs ni comentarios |
+| Lista de participantes | Solo cifrada | El fichero `gente` está en el repositorio, pero cifrado |
+| Frase de paso y contraseña de Gmail | Nunca | Son secrets; GitHub los enmascara en los logs |
+
+Por tanto, el único lugar donde queda texto escrito por vosotros a la vista de
+cualquiera es el issue de un mensaje general. Desde Actions (sección 3) solo
+se envían el recordatorio y el aviso de nueva sesión, y sus logs no contienen
+nada que no estuviera ya en la web. Lo único que un tercero puede deducir en
+todos los casos es cuánta gente hay en cada grupo, nunca quién.
+
 ### 2.1 Mensaje general (texto libre)
 
 Para cualquier aviso: cambio de aula, cancelación, convocatoria de ponentes...
