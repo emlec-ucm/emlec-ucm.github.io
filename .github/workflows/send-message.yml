@@ -10,10 +10,12 @@ name: Enviar mensaje a participantes
 #      Se añade la etiqueta "enviar"  -> se envía a todos los participantes
 #                                        y el issue se cierra.
 #
-# Solo actúa si quien creó el issue es miembro/colaborador del repositorio.
-# En un repositorio público cualquiera puede abrir issues, pero solo quien
-# tiene permisos puede poner etiquetas, así que nadie externo puede disparar
-# un envío.
+# Autorización: en un repositorio público cualquiera puede abrir issues, pero
+# solo quien tiene permisos (triage o superior) puede poner etiquetas. Además
+# el paso "Comprobar condiciones" verifica vía API el permiso de quien puso la
+# etiqueta, y consulta el estado y las etiquetas del issue en ese momento (el
+# payload del evento puede llegar incompleto cuando las etiquetas se ponen al
+# crear el issue).
 
 on:
   issues:
@@ -29,19 +31,35 @@ concurrency:
 
 jobs:
   send:
-    if: >
-      github.event.issue.state == 'open' &&
-      (github.event.label.name == 'enviar' || github.event.label.name == 'prueba') &&
-      contains(github.event.issue.labels.*.name, 'mensaje') &&
-      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
+    if: github.event.label.name == 'enviar' || github.event.label.name == 'prueba'
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
       ISSUE_NUMBER: ${{ github.event.issue.number }}
       LABEL: ${{ github.event.label.name }}
+      SENDER: ${{ github.event.sender.login }}
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
+      - name: Comprobar condiciones
+        id: check
+        run: |
+          INFO=$(gh api "repos/$GH_REPO/issues/$ISSUE_NUMBER" --jq '"\(.state)|\(.author_association)|\([.labels[].name] | join(","))"')
+          STATE=${INFO%%|*}; REST=${INFO#*|}; ASSOC=${REST%%|*}; LABELS=${REST#*|}
+          ROLE=$(gh api "repos/$GH_REPO/collaborators/$SENDER/permission" --jq '.role_name' 2>/dev/null || echo "none")
+          echo "Issue #$ISSUE_NUMBER: estado=$STATE etiquetas=[$LABELS] autor=$ASSOC | etiqueta '$LABEL' puesta por $SENDER (permiso: $ROLE)"
+          if [ "$STATE" != "open" ]; then
+            echo "::error::El issue #$ISSUE_NUMBER está cerrado. Reábrelo y vuelve a poner la etiqueta '$LABEL'."; exit 1
+          fi
+          case ",$LABELS," in
+            *,mensaje,*) ;;
+            *) echo "::error::El issue #$ISSUE_NUMBER no tiene la etiqueta 'mensaje'. Solo se envían los issues creados con la plantilla 'Mensaje a los participantes'."; exit 1 ;;
+          esac
+          case "$ROLE" in
+            admin|maintain|write|triage) ;;
+            *) echo "::error::$SENDER no tiene permisos en el repositorio para enviar mensajes (permiso: $ROLE)."; exit 1 ;;
+          esac
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -74,5 +92,5 @@ jobs:
       - name: Avisar del fallo en el issue
         if: failure()
         run: |
-          gh issue comment "$ISSUE_NUMBER" --body "❌ **No se pudo enviar el mensaje.** Revisa el [log de la ejecución]($RUN_URL). Corrige lo necesario y vuelve a añadir la etiqueta **$LABEL** para reintentar."
-          gh issue edit "$ISSUE_NUMBER" --remove-label "$LABEL"
+          gh issue comment "$ISSUE_NUMBER" --body "❌ **No se pudo enviar el mensaje** (etiqueta \`$LABEL\`). Revisa el [log de la ejecución]($RUN_URL): el motivo aparece en rojo. Corrige lo necesario y vuelve a añadir la etiqueta **$LABEL** para reintentar." || true
+          gh issue edit "$ISSUE_NUMBER" --remove-label "$LABEL" || true
