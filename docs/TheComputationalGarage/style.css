@@ -70,3 +70,19 @@ h2 {
 .site-header h1 {
     margin: 0;
 }
+
+/* ===== Navegación de vuelta ===== */
+
+.site-nav {
+    font-size: 0.95em;
+    margin-bottom: 1.5em;
+}
+
+.site-nav a {
+    color: #444;
+    text-decoration: none;
+}
+
+.site-nav a:hover {
+    text-decoration: underline;
+}
