@@ -48,41 +48,60 @@ falta, de `SCHEDULED`).
 
 ## 2. Enviar un mensaje desde un issue
 
-Es el procedimiento general para cualquier envío manual. El mensaje se redacta
-como un *issue* de GitHub y se envía poniéndole una etiqueta. Sirve para tres
-tipos de correo, que se eligen en el desplegable **Tipo de mensaje** del
-formulario:
+Es el procedimiento general para cualquier envío manual: el correo se prepara
+como un *issue* de GitHub y se envía poniéndole una etiqueta. Con la plantilla
+se pueden mandar tres tipos de correo, que se eligen en el desplegable **Tipo
+de mensaje**. Los pasos son distintos según el tipo; están en 2.1 y 2.2.
 
-- **Mensaje general**: cualquier aviso (cambio de aula, cancelación,
-  convocatoria de ponentes...). Escribes tú el asunto y el cuerpo.
-- **Recordatorio de la próxima sesión**: el correo de recordatorio de siempre,
-  generado con los datos de la próxima sesión programada en `sesiones.org`.
-- **Aviso de nueva sesión**: el correo de "nueva sesión", generado igual.
+### 2.1 Mensaje general (texto libre)
 
-Pasos:
+Para cualquier aviso: cambio de aula, cancelación, convocatoria de ponentes...
 
 1. Ve a **Issues → New issue** y elige la plantilla **"Mensaje a los participantes"**.
-2. Elige el **Tipo de mensaje**.
-3. Para el **mensaje general**, escribe el asunto en el **título** después de
-   `[Mensaje]` (ejemplo: `[Mensaje] Cambio de aula para la sesión de octubre`)
-   y el cuerpo en **Mensaje**. Admite Markdown (negritas, listas, enlaces); la
-   pestaña *Preview* muestra cómo quedará. No hace falta firmar: la firma del
-   grupo se añade sola al final. Si quieres que el correo incluya los datos de
-   la próxima sesión programada, marca la casilla de **Opciones**.
-4. Para el **recordatorio** o el **aviso de nueva sesión**, el asunto y el
-   cuerpo se generan solos y el título del issue no se usa. El campo
-   **Mensaje** es opcional: si escribes algo, se añade como párrafo después de
-   los datos de la sesión (por ejemplo, "esta vez empezamos a las 12:00"). Si
-   no hay ninguna sesión futura en `sesiones.org`, el envío falla y lo indica
-   en un comentario del issue.
-5. Pulsa **Submit new issue**. **Esto no envía nada todavía.**
-6. Para revisar el correo, añade al issue la etiqueta **`prueba`**: en unos
-   segundos llega solo a la cuenta de Gmail del grupo
-   (`thecomputationalgarage@gmail.com`, no a tu dirección personal), y el
-   issue recibe un comentario confirmándolo. Puedes editar el issue y repetir
-   la prueba.
-7. Para enviarlo a todos, añade la etiqueta **`enviar`**. El issue recibe un
-   comentario con la hora del envío y se cierra automáticamente.
+2. En **Tipo de mensaje**, deja **"Mensaje general"** (es la opción por defecto).
+3. En el **título**, escribe el asunto del correo después de `[Mensaje]`.
+   Ejemplo: `[Mensaje] Cambio de aula para la sesión de octubre`.
+4. En **Mensaje**, escribe el cuerpo. Admite Markdown (negritas, listas,
+   enlaces); la pestaña *Preview* muestra cómo quedará. No hace falta firmar:
+   la firma del grupo se añade sola al final.
+5. Si quieres que el correo termine con los datos de la próxima sesión
+   programada, marca la casilla de **Opciones**.
+6. Añade la etiqueta **`prueba`** (ver *Dónde se ponen las etiquetas*, más
+   abajo) y pulsa **Submit new issue**. En unos segundos el correo llega
+   **solo a la cuenta de Gmail del grupo** (`thecomputationalgarage@gmail.com`,
+   no a tu dirección personal) y el issue recibe un comentario confirmándolo.
+   Si quieres cambiar algo, edita el issue y vuelve a poner `prueba`.
+7. Cuando esté bien, añade la etiqueta **`enviar`**. El correo sale a todos
+   los participantes, el issue recibe un comentario con la hora del envío y se
+   cierra solo.
+
+Si prefieres no hacer prueba, puedes poner `enviar` directamente en el paso 6.
+
+### 2.2 Recordatorio de la próxima sesión, o aviso de nueva sesión
+
+Son los mismos correos que se envían automáticamente (sección 1), generados
+con los datos de la próxima sesión programada en `sesiones.org`. Sirven para
+repetir el aviso o mandar un recordatorio fuera del cron. No hay que escribir
+nada: ni asunto ni cuerpo.
+
+1. Ve a **Issues → New issue** y elige la plantilla **"Mensaje a los participantes"**.
+2. En **Tipo de mensaje**, elige **"Recordatorio de la próxima sesión"** o
+   **"Aviso de nueva sesión"**.
+3. Deja el **título** tal cual (`[Mensaje] `): en estos dos tipos no se usa.
+4. Deja el campo **Mensaje** vacío. Si escribes algo, se añade al correo como
+   párrafo después de los datos de la sesión (por ejemplo, "esta vez
+   empezamos a las 12:00").
+5. Añade la etiqueta **`prueba`** y pulsa **Submit new issue**. El correo
+   llega solo a la cuenta de Gmail del grupo, y el issue recibe un comentario
+   confirmándolo.
+6. Cuando esté bien, añade la etiqueta **`enviar`**. Sale a todos los
+   participantes y el issue se cierra solo.
+
+"Próxima sesión programada" es la de fecha más cercana igual o posterior a
+hoy. Si no hay ninguna en `sesiones.org`, el envío falla y el issue recibe un
+comentario indicándolo.
+
+El mismo resultado se consigue desde Actions (sección 3), sin paso de prueba.
 
 **Dónde se ponen las etiquetas.** Las etiquetas se eligen en el menú
 desplegable **Labels** que hay en la última fila de la ventana de edición del
