@@ -7,6 +7,15 @@ Todos los correos salen desde la cuenta de Gmail del grupo (secret `EMAIL_USER`)
 a la lista de participantes (secret `EMAIL_RECIPIENTS`), siempre en **copia
 oculta**: ningún participante ve las direcciones de los demás.
 
+## Tipos de mensajes
+
+| Mensaje | Cómo se envía | Dónde |
+|---|---|---|
+| **Nueva sesión** (aviso con fecha, hora, ponente y lugar) | Automático, al añadir la sesión en `sesiones.org` y hacer push | Sección 1 |
+| **Recordatorio** ("mañana hay sesión") | Automático, cada mañana si hay sesión al día siguiente | Sección 1 |
+| **Mensaje general** (cualquier aviso: cambio de aula, cancelación, convocatoria de ponentes...) | A mano, redactándolo como issue | Sección 2 |
+| **Reenvío manual** del aviso de nueva sesión o del recordatorio de la próxima sesión | A mano, desde Actions | Sección 3 |
+
 ---
 
 ## 1. Qué se envía automáticamente
@@ -53,10 +62,18 @@ GitHub y se envía poniéndole una etiqueta.
    marca la casilla de **Opciones**.
 5. Pulsa **Submit new issue**. **Esto no envía nada todavía.**
 6. Para revisar el correo, añade al issue la etiqueta **`prueba`**: en unos
-   segundos llega solo a la cuenta de Gmail del grupo, y el issue recibe un
-   comentario confirmándolo. Puedes editar el issue y repetir la prueba.
+   segundos llega solo a la cuenta de Gmail del grupo
+   (`thecomputationalgarage@gmail.com`, no a tu dirección personal), y el
+   issue recibe un comentario confirmándolo. Puedes editar el issue y repetir
+   la prueba.
 7. Para enviarlo a todos, añade la etiqueta **`enviar`**. El issue recibe un
    comentario con la hora del envío y se cierra automáticamente.
+
+**Dónde se ponen las etiquetas.** Las etiquetas se eligen en el menú
+desplegable **Labels** que hay en la última fila de la ventana de edición del
+issue (o, en la vista clásica, en la columna de la derecha de la página del
+issue). Se pueden poner al crear el issue o en cualquier momento después,
+abriendo el issue y pulsando en ese menú.
 
 Los issues cerrados con la etiqueta `mensaje` son el archivo de todo lo enviado.
 
@@ -74,8 +91,9 @@ etiqueta. Corrige lo necesario y vuelve a ponerla.
 
 ## 3. Reenviar un anuncio o recordatorio a mano
 
-Si hace falta repetir el aviso de la próxima sesión o mandar un recordatorio
-fuera del cron:
+Estos dos mensajes tienen su texto fijo y toman los datos de `sesiones.org`,
+por eso **no se hacen desde un issue sino desde Actions**. Sirven para repetir
+el aviso de la próxima sesión o mandar un recordatorio fuera del cron:
 
 1. Ve a **Actions → Send Email Notification → Run workflow**.
 2. Elige el tipo:
