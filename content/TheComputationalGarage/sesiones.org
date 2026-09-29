@@ -1,8 +1,16 @@
-#+TITLE: Histórico de Sesiones
+#+TITLE: Sesiones de The Computational Garage - EMLEC UCM
 #+AUTHOR: The Computational Garage
 #+LANGUAGE: es
 #+OPTIONS: toc:nil num:nil html-style:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css" />
+#+HTML_HEAD: <meta name="description" content="Calendario e histórico de sesiones de The Computational Garage, las reuniones entre jóvenes investigadores del grupo EMLEC de la Universidad Complutense de Madrid: fechas, ponentes, hora y lugar.">
+#+HTML_HEAD: <meta property="og:title" content="Sesiones de The Computational Garage - EMLEC UCM">
+#+HTML_HEAD: <meta property="og:description" content="Calendario e histórico de sesiones de The Computational Garage (grupo EMLEC, UCM): fechas, ponentes, hora y lugar.">
+#+HTML_HEAD: <meta property="og:type" content="website">
+#+HTML_HEAD: <meta property="og:url" content="https://emlec-ucm.github.io/TheComputationalGarage/sesiones.html">
+#+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/TheComputationalGarage/TCG-EMLEC-Alargado.png">
+
+#+HTML: <nav class="site-nav"><a href="../TheComputationalGarage.html">&larr; The Computational Garage</a> &middot; <a href="../index.html">Grupo EMLEC (UCM)</a></nav>
 
 # +HTML: <header class="site-header">
 # +HTML: <img src="LogoAlargadoRecortado.png" alt="Logo del grupo" class="logo"/>

@@ -1,6 +1,4 @@
 #+TITLE: Sitemap for project html
 
-- [[file:index.org][940223 - ECONOMETRÍA EN ESPACIO DE LOS ESTADOS Y MACHINE LEARNING]]
-- [[file:DePrueba.org][Contenido de prueba]]
+- [[file:index.org][Econometría, Machine Learning y Economía Computacional (EMLEC)]]
 - [[file:E4.org][E4 toolbox]]
-- [[file:README.org][README]]

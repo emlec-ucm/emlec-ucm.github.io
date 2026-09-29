@@ -13,7 +13,7 @@
 #+HTML_HEAD: <meta property="og:description" content="Grupo de investigación de la Universidad Complutense de Madrid fundado en 2004. Investigación en series temporales, modelos factoriales dinámicos, predicción económica y machine learning.">
 #+HTML_HEAD: <meta property="og:type" content="website">
 #+HTML_HEAD: <meta property="og:url" content="https://emlec-ucm.github.io/index.html">
-#+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/content/emlec-alargado-luna.png">
+#+HTML_HEAD: <meta property="og:image" content="https://emlec-ucm.github.io/emlec-alargado-luna.png">
 #+HTML_HEAD: <meta name="twitter:card" content="summary_large_image">
 #+HTML_HEAD: <meta name="geo.region" content="ES-MD">
 #+HTML_HEAD: <meta name="geo.placename" content="Madrid, España">
@@ -44,7 +44,7 @@
 #+END_EXPORT
 [[file:emlec-alargado-luna.png]]
 
-El grupo de investigación [[https://www.ucm.es/grupos/grupo/225][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la UCM fue fundado en diciembre de 2004 con el objetivo de organizar nuestras investigaciones sobre la teoría y aplicaciones de los métodos en el Espacio de Estados, enfocándonos especialmente a la modelización econométrica de series temporales. 
+El grupo de investigación [[https://www.ucm.es/grupos/grupo/225][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la UCM fue fundado en diciembre de 2004 con el objetivo de organizar nuestras investigaciones sobre la teoría y las aplicaciones de los métodos en el Espacio de los Estados, enfocándonos especialmente en la modelización econométrica de series temporales.
 Con el tiempo, hemos ampliado nuestro ámbito de estudio al campo del /Machine Learning/ y la /Economía Computacional/.
  
 - [[https://produccioncientifica.ucm.es/grupos/5080/detalle][Detalle del grupo]]
@@ -57,11 +57,11 @@ Con el tiempo, hemos ampliado nuestro ámbito de estudio al campo del /Machine L
 ** COMMENT Contacto
 Facultad de Ciencias Económicas de la UCM. Campus de Somosaguas. 28223 Pozuelo de Alarcón (MADRID).
 
-** Repositorio del grupo
+* Repositorio del grupo
 
 [[https://github.com/emlec-ucm]]
 
-Algunos de los proyectos desarrollados en este grupo han sido implementados en la [[file:E4.org][toolbox */E4/*]] de MatLab.
+Algunos de los proyectos desarrollados en este grupo han sido implementados en la [[file:E4.org][toolbox */E4/*]] de MATLAB.
 
 * The Computational Garage
 
@@ -71,15 +71,13 @@ Algunos de los proyectos desarrollados en este grupo han sido implementados en l
 [[file:TheComputationalGarage.org][file:TheComputationalGarage/TCG-EMLEC-Alargado.png]]
 
 Desde este grupo estimulamos el intercambio de ideas y la creación de vínculos académicos entre jóvenes investigadores.
-Más información [[file:TheComputationalGarage.org][*aquí*]]
+[[file:TheComputationalGarage.org][*Más información sobre The Computational Garage*]]
 
 *  Contacto
 
 Nuestro grupo tiene su sede en la Facultad de Ciencias Económicas de la UCM.
 Campus de Somosaguas. 28223 Pozuelo de Alarcón (MADRID).
 
-La persona de contacto es Alfredo García-Hiernaux. Puede enviarle un e-mail pulsando [[https://www.ucm.es/grupoee/formulario][aquí]].
+La persona de contacto es Alfredo García-Hiernaux, a quien puede escribir a través del [[https://www.ucm.es/grupoee/formulario][formulario de contacto]].
 
-* 
-
-Enlace a la [[https://www.ucm.es/grupoee/][antigua web del grupo]].
+También puede consultar la [[https://www.ucm.es/grupoee/][antigua web del grupo]].

@@ -4,7 +4,7 @@
 
 Repositorio para la web del grupo de investigación de la UCM
 
-- 940223 :: ECONOMETRÍA EN ESPACIO DE LOS ESTADOS Y MACHINE LEARNING
+- 940223 :: Econometría, Machine Learning y Economía Computacional (EMLEC)
 
 Este repositorio aloja los ficheros fuente para la web en la carpeta [[file:content/][content]].  
 La conversión a =html= se realiza mediante un workflow que sitúa los ficheros =html= en la carpeta [[file:docs/][docs]]

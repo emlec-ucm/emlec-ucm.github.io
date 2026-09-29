@@ -3,7 +3,6 @@
 #+AUTHOR: Econometría, Machine Learning y Economía Computacional
 # Grupo de Investigación UCM
 #+LANGUAGE: es
-#+DATE: Febrero de 2026
 # +OPTIONS: toc:nil 
 #+OPTIONS: title:nil
 
@@ -43,12 +42,12 @@
 [[file:TheComputationalGarage/TCG-EMLEC-Alargado.png]]
 
 #+begin_quote
-Ésta es una iniciativa del Grupo de Investigación (GI) [[https://emlec-ucm.github.io][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la Universidad Complutense de Madrid para estimular el intercambio de ideas y la creación de vínculos académicos entre jóvenes investigadores.
+Esta es una iniciativa del Grupo de Investigación (GI) [[https://emlec-ucm.github.io][/Econometría, Machine Learning y Economía Computacional/ (EMLEC)]] de la Universidad Complutense de Madrid para estimular el intercambio de ideas y la creación de vínculos académicos entre jóvenes investigadores.
 #+end_quote
 
-* Sesiones programadas
+* Sesiones
 
-[[file:TheComputationalGarage/sesiones.org][Sesiones]]
+[[file:TheComputationalGarage/sesiones.org][Calendario e histórico de sesiones]]: próximas sesiones y las ya celebradas, con ponentes, hora y lugar.
 
 * Motivación y propósito
 
@@ -70,11 +69,11 @@ La iniciativa está pensada _para investigadores en etapas iniciales_ (ayudantes
 
 * Formato de las sesiones
 
-- Duración :: un máximo de 20 minutos de exposición y discusión podría ser suficiente.
+- Duración :: unos 20 minutos de exposición, seguidos de discusión.
 
 - Estilo :: informal, orientado a ideas y problemas, no a resultados cerrados.
 
-- Lenguaje :: técnico si hace falta, puede o no haber formalismo, no es necesario. 
+- Nivel :: técnico si hace falta; el formalismo es opcional.
 
 - Idioma :: español o inglés, sin preferencia.
 
@@ -88,14 +87,20 @@ La iniciativa está pensada _para investigadores en etapas iniciales_ (ayudantes
 
 * Fechas y calendario
 
-- Periodicidad :: por definir... /dependerá en gran medida de la demanda/.
+- Periodicidad :: cada dos o tres semanas, /según la demanda/.
 
-- Día de la semana en la que celebrar las reuniones :: En principio martes o viernes. 
+- Día de la semana :: martes.
 
-- Horario :: /Nunca coincidirá con el seminario del Departamento/ICAE/ 
+- Horario :: 11:30. /Nunca coincidirá con el seminario del Departamento/ICAE./
 
-- Lugar :: Seminario 302.
+- Lugar :: Aula 302, Pabellón de Primero (Facultad de Ciencias Económicas y Empresariales, Campus de Somosaguas).
 
-El calendario se irá cerrando de forma flexible; siempre en función de la disponibilidad y del número de participantes.
+El calendario se va cerrando de forma flexible, en función de la disponibilidad y del número de participantes. Las fechas concretas están en el [[file:TheComputationalGarage/sesiones.org][calendario de sesiones]].
+
+* Cómo participar
+
+- Para *proponer una sesión* (contar en qué estás trabajando, aunque sea una idea a medio hacer) o para *recibir los avisos* de las próximas sesiones por correo, escribe a [[mailto:thecomputationalgarage@gmail.com][thecomputationalgarage@gmail.com]].
+
+- Para *asistir* no hace falta inscribirse: basta con venir.
 
 

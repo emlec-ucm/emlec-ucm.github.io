@@ -23,13 +23,15 @@
 <h1 class="sr-only">E4 Toolbox - MATLAB para análisis de series temporales en espacio de estados (EMLEC - UCM)</h1>
 #+END_EXPORT
 
+/E4 es una toolbox de MATLAB, desarrollada por este grupo, para la modelización y el análisis de series temporales mediante métodos en el Espacio de los Estados. La documentación está en inglés./
+
 * A MATLAB toolbox for time series analysis
 
-** What is E4 ?
+** What is E4?
 
 E4 is a MATLAB Toolbox for time series modeling and analysis. Its name, E4, refers to the Spanish /Estimación de modelos Econométricos en Espacio de los Estados/, meaning "State-Space Estimation of Econometric models".
 
-E4  uses state-space methods to achieve flexibility and reliability. Despite its orientation to state-space, it also supports many standard time series models, such as VARMAX, structural econometric models, unobserved components, and many others.
+E4 uses state-space methods to achieve flexibility and reliability. Although it is built on state-space methods, it also supports many standard time series models, such as VARMAX, structural econometric models, unobserved components, and many others.
 
 The Toolbox also includes ready-to-use functions for model specification, preliminary parameter estimation, analytical computation of the likelihood gradient and the information matrix, simulation, forecasting, signal extraction, and more.
 
@@ -37,7 +39,7 @@ E4 is free software. You can download it from: [[https://www.ucm.es/e-4/]]
 
 You are allowed to redistribute and/or modify E4 under the terms of the GNU General Public License (GPL) as published by the Free Software Foundation.
 
-If you feel that  our contribution deserves an acknowledgement, you can do so by citing the following book in your works:
+If you feel that our contribution deserves an acknowledgement, please cite the following book:
 
 ** Companion book
 
@@ -45,7 +47,6 @@ If you feel that  our contribution deserves an acknowledgement, you can do so by
 Jose Manuel Casals, Alfredo Garcia-Hiernaux, Miguel Jerez, Sonia Sotoca, Adao Alexandre Trindade: [[https://www.routledge.com/State-Space-Methods-for-Time-Series-Analysis-Theory-Applications-and-Software/Casals-Garcia-Hiernaux-Jerez-Sotoca-Trindade/p/book/9781482219593][State-Space Methods for Time Series Analysis. Theory, Applications and Software]]. CRC Press, 2016.
 #+end_quote
 
-See this book at [[http://www.sponpress.com/books/details/9781482219593/][Taylor & Francis]], [[https://www.crcpress.com/State-Space-Methods-for-Time-Series-Analysis-Theory-Applications-and-Software/Casals-Garcia-Hiernaux-Jerez-Sotoca-Trindade/p/book/9781482219593][CRC Press]],
-or download free supplementary materials from the [[https://www.ucm.es/e-4/ss-book-microsite][book microsite]].
+See this book at [[https://www.routledge.com/State-Space-Methods-for-Time-Series-Analysis-Theory-Applications-and-Software/Casals-Garcia-Hiernaux-Jerez-Sotoca-Trindade/p/book/9781482219593][Routledge / CRC Press]], or download free supplementary materials from the [[https://www.ucm.es/e-4/ss-book-microsite][book microsite]].
 
 [[https://www.ucm.es/e-4/ss-book-microsite][https://www.ucm.es/data/cont/docs/1034-2016-02-11-9781482219593.jpg]]
