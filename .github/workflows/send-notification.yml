@@ -55,7 +55,6 @@ jobs:
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
           GENTE_PASSPHRASE: ${{ secrets.GENTE_PASSPHRASE }}
           RECIPIENTS_FILE: content/TheComputationalGarage/gente
           NOTIFICATION_TYPE: ${{ inputs.notification_type }}

@@ -28,8 +28,9 @@ Variables de entorno (GitHub Secrets):
   GENTE_PASSPHRASE   Frase de paso del fichero cifrado con la lista de
                      participantes (RECIPIENTS_FILE, por defecto
                      content/TheComputationalGarage/gente)
-  EMAIL_RECIPIENTS   Alternativa a lo anterior: destinatarios separados por
-                     comas (sin grupos). Solo se usa si no hay GENTE_PASSPHRASE.
+  EMAIL_RECIPIENTS   Solo para pruebas en local sin el fichero cifrado:
+                     destinatarios separados por comas (sin grupos). Se usa
+                     únicamente si no hay GENTE_PASSPHRASE.
 
 Opcionales:
   GH_TOKEN / GITHUB_TOKEN   Para convertir Markdown a HTML con la API de GitHub.

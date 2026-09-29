@@ -190,8 +190,9 @@ Si la frase de paso cambia, hay que actualizar el secret `GENTE_PASSPHRASE`.
 El fichero no tiene extensión `.org` a propósito: los `.org` de `content/` se
 exportan a la web, y este no debe publicarse.
 
-Si `GENTE_PASSPHRASE` no está definido, el script usa el secret
-`EMAIL_RECIPIENTS` (lista separada por comas, sin grupos) como alternativa.
+Para probar el script en local sin el fichero cifrado se puede definir la
+variable de entorno `EMAIL_RECIPIENTS` (lista separada por comas, sin grupos)
+en lugar de `GENTE_PASSPHRASE`. No existe como secret en GitHub.
 
 ---
 
