@@ -14,10 +14,8 @@
 #+HTML_HEAD: <meta name="geo.placename" content="Madrid, España">
 #+HTML_HEAD: <style>.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }</style>
 
-# ###########
-# ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
-#+SETUPFILE: ../css/simple_inlineUCM.theme  
-# ###########
+# Sin tema: esta página usa solo simple.css (la hoja por defecto de publish.el),
+# más estrecha y con fondo oscuro si el sistema está en modo oscuro.
 
 #+BEGIN_EXPORT html
 <h1 class="sr-only">E4 Toolbox - MATLAB para análisis de series temporales en espacio de estados (EMLEC - UCM)</h1>
