@@ -17,10 +17,13 @@ on:
         default: false
         type: boolean
   schedule:
-    # 05:00 UTC = 07:00 en Madrid en verano, 06:00 en invierno.
-    # GitHub suele retrasar los crons entre 1 y 3 horas, así que el correo
-    # llega normalmente entre las 7 y las 9 de la mañana.
-    - cron: '0 5 * * *'
+    # 05:23 UTC = 07:23 en Madrid en verano, 06:23 en invierno.
+    # GitHub suele retrasar los crons entre 1 y 3 horas (más en las horas en
+    # punto, por eso el minuto 23), así que el correo llega normalmente entre
+    # las 7 y las 9 de la mañana. El 30/09/2026 el cron no se ejecutó tras la
+    # reactivación del workflow; cambiar esta línea fuerza a GitHub a volver a
+    # registrar la programación.
+    - cron: '23 5 * * *'
 
 permissions:
   contents: write   # necesario para el commit de keepalive
