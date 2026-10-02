@@ -36,10 +36,11 @@ body:
     id: destinatarios
     attributes:
       label: Destinatarios
-      description: Grupos de la lista de participantes. "Senior" incluye siempre a los jefes.
+      description: Grupos de la lista de participantes. Los jefes van incluidos en "Senior" y en "Junior".
       options:
         - Todos los participantes
         - Senior (incluye a los jefes)
+        - Junior (incluye a los jefes)
         - Solo jefes
         - Solo junior
       default: 0

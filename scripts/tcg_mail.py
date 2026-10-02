@@ -39,7 +39,8 @@ Lista de participantes: el fichero es un org con una entrada cifrada por
 org-crypt (cifrado simétrico). Dentro del bloque cifrado, cada subencabezado
 org es un grupo (Jefes, Senior, Junior...) y debajo van las direcciones, una
 por línea (se ignoran comas, nombres y las líneas que empiezan por '#').
-Destinatarios posibles (--to): todos, senior (= Senior + Jefes), jefes, junior.
+Destinatarios posibles (--to): todos, senior (= Senior + Jefes),
+junior_jefes (= Junior + Jefes), jefes, junior.
 
 Los destinatarios van siempre en copia oculta (Bcc): nadie ve la lista.
 El script termina con código 1 si algo falla (secrets ausentes, error SMTP),
@@ -67,6 +68,7 @@ DEFAULT_RECIPIENTS_FILE = "content/TheComputationalGarage/gente"
 AUDIENCES = {
     "todos": None,
     "senior": ["jefes", "senior"],
+    "junior_jefes": ["jefes", "junior"],
     "jefes": ["jefes"],
     "junior": ["junior"],
 }
@@ -373,9 +375,14 @@ def issue_kind(sections):
 def issue_audience(sections):
     """Clave de AUDIENCES según el desplegable 'Destinatarios' del issue."""
     value = sections.get("destinatarios", "").strip().lower()
-    for key in ("senior", "jefes", "junior"):
-        if value.startswith(key) or value.startswith("solo " + key):
-            return key
+    if value.startswith("senior"):
+        return "senior"
+    if value.startswith("junior"):
+        return "junior_jefes" if "jefes" in value else "junior"
+    if value.startswith("solo jefes") or value.startswith("jefes"):
+        return "jefes"
+    if value.startswith("solo junior"):
+        return "junior"
     return "todos"
 
 
@@ -540,6 +547,7 @@ def send_email(subject, html_body, text_body, creds, audience="todos", test=Fals
     gh_output = os.environ.get("GITHUB_OUTPUT")
     if gh_output:
         labels = {"todos": "todos los participantes", "senior": "senior (incluidos los jefes)",
+                  "junior_jefes": "junior (incluidos los jefes)",
                   "jefes": "solo los jefes", "junior": "solo los junior"}
         with open(gh_output, "a", encoding="utf-8") as f:
             f.write(f"audience={labels.get(audience, audience)}\n")

@@ -92,7 +92,7 @@ Para cualquier aviso: cambio de aula, cancelación, convocatoria de ponentes...
 1. Ve a **Issues → New issue** y elige la plantilla **"Mensaje a los participantes"**.
 2. En **Tipo de mensaje**, deja **"Mensaje general"** (es la opción por defecto).
    En **Destinatarios**, elige a quién va: todos los participantes (por
-   defecto), senior (que incluye siempre a los jefes), solo jefes o solo
+   defecto), senior o junior (ambos incluyen a los jefes), solo jefes o solo
    junior. Los grupos son los del fichero de participantes (sección 4).
 3. En el **título**, escribe el asunto del correo después de `[Mensaje]`.
    Ejemplo: `[Mensaje] Cambio de aula para la sesión de octubre`.
@@ -120,6 +120,7 @@ El número de direcciones es el real, contado tras descifrar la lista:
 |---|---|
 | Todos los participantes | ✅ **Prueba enviada** (29/09/2026 10:55) solo a la cuenta de correo del grupo. Revísala y, si está bien, añade la etiqueta **enviar** para mandarla a sus destinatarios: **todos los participantes** (23 direcciones). |
 | Senior (incluye a los jefes) | … para mandarla a sus destinatarios: **senior (incluidos los jefes)** (8 direcciones). |
+| Junior (incluye a los jefes) | … para mandarla a sus destinatarios: **junior (incluidos los jefes)** (18 direcciones). |
 | Solo jefes | … para mandarla a sus destinatarios: **solo los jefes** (3 direcciones). |
 | Solo junior | … para mandarla a sus destinatarios: **solo los junior** (15 direcciones). |
 
@@ -214,7 +215,8 @@ se ignoran (sirve para dejar a alguien apuntado sin que reciba correos).
 ```
 
 Destinatarios posibles en los envíos: **todos** (los tres grupos), **senior**
-(Senior más Jefes), **jefes** y **junior**. Los correos automáticos van
+(Senior más Jefes), **junior con jefes** (Junior más Jefes), **jefes** y
+**junior**. Los correos automáticos van
 siempre a todos. Si se añade un grupo nuevo en el fichero, hay que añadir la
 opción en el formulario del issue (`.github/ISSUE_TEMPLATE/mensaje.yml`) y en
 `AUDIENCES` de `scripts/tcg_mail.py`.
