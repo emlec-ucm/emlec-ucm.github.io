@@ -21,6 +21,19 @@
 
 * 2026
 
+** 2026-10-27
+   :PROPERTIES:
+   :HTML_CONTAINER_CLASS: session
+   :SCHEDULED: <2026-10-27 Tue 11:30>
+   :SPEAKERS: Alba Miñano Mañero
+   :LOCATION: Aula 302, Pabellón de Primero
+   :END:
+
+   - *Ponentes:* Alba Miñano Mañero
+   - *Hora:* 11:30
+   - *Lugar:* Aula 302, Pabellón de Primero
+
+
 ** 2026-05-12
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: session
