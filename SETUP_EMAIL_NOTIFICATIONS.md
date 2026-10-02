@@ -248,7 +248,7 @@ en lugar de `GENTE_PASSPHRASE`. No existe como secret en GitHub.
 |---|---|
 | `scripts/tcg_mail.py` | Único script de correo. Subcomandos `announce`, `remind` y `message`. Opciones comunes `--test` (solo a la cuenta del grupo) y `--dry-run` (no envía; muestra el correo). |
 | `.github/workflows/publish.yml` | Genera la web al hacer push y ejecuta `announce --base <commit anterior>`. |
-| `.github/workflows/send-notification.yml` | Cron diario (`remind --if-tomorrow`) y ejecución manual (`remind` o `announce --force`). Incluye un paso *keepalive* (ver abajo). |
+| `.github/workflows/recordatorios.yml` | Cron diario (`remind --if-tomorrow`) y ejecución manual (`remind` o `announce --force`). Incluye un paso *keepalive* (ver abajo). |
 | `.github/workflows/send-message.yml` | Envía el contenido de un issue al etiquetarlo con `prueba` o `enviar`. |
 | `.github/ISSUE_TEMPLATE/mensaje.yml` | Formulario del issue "Mensaje a los participantes". |
 
@@ -295,9 +295,10 @@ EMAIL_USER=x EMAIL_PASSWORD=x EMAIL_RECIPIENTS=a@ucm.es \
 
 Comprobaciones que solo pueden hacerse cuando ocurran:
 
-- [ ] **Primera ejecución del cron** con el sistema nuevo (30/09/2026 por la
-  mañana): el run de "Send Email Notification" debe salir en verde con
-  "No hay sesión mañana" en el log. El paso de keepalive solo hace algo cuando
+- [ ] **Primera ejecución del cron** con el sistema nuevo: el run de "Send Email
+  Notification" debe salir en verde con "No hay sesión mañana" en el log. No
+  se ejecutó ni el 30/09 ni el 01/10/2026 tras reactivar el workflow; el
+  02/10/2026 se recreó con otro nombre de fichero (`recordatorios.yml`). El paso de keepalive solo hace algo cuando
   el repositorio lleva 50 días sin commits.
 - [ ] **Primera sesión real del curso**: al añadirla a `sesiones.org` y hacer
   push, el run de "Push Web Deploy" debe enviar el aviso a todos los
