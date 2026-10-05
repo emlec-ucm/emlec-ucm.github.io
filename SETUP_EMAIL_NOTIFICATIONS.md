@@ -24,7 +24,7 @@ direcciones de los demás.
 | Correo | Cuándo | Cómo se decide |
 |---|---|---|
 | **Nueva sesión** | Al hacer push a `main` | Se compara `content/TheComputationalGarage/sesiones.org` con el estado anterior al push. Por cada sesión **nueva con fecha futura** se envía un aviso. Añadir sesiones pasadas o corregir textos no envía nada. |
-| **Recordatorio** | Cada día (cron a las 05:23 UTC; GitHub lo ejecuta con retraso variable, desde una hora hasta seis, así que llega entre las 7 y las 13 hora de Madrid) | Solo si hay una sesión programada **para mañana**. |
+| **Recordatorio** | Cada día (cron a las 01:47 UTC; GitHub lo ejecuta con retraso variable, de una a seis horas, así que llega de madrugada o a primera hora, siempre antes de las 10:00 hora de Madrid) | Solo si hay una sesión programada **para mañana**. |
 
 Los datos de la sesión (fecha, hora, ponentes, lugar) se toman de `sesiones.org`:
 

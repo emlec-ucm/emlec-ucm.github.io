@@ -17,13 +17,14 @@ on:
         default: false
         type: boolean
   schedule:
-    # 05:23 UTC = 07:23 en Madrid en verano, 06:23 en invierno.
+    # 01:47 UTC = 03:47 en Madrid en verano, 02:47 en invierno.
     # GitHub ejecuta los crons con retraso variable: en julio de 2026 entre 2 y
-    # 3 horas; en octubre de 2026, tras reactivar el workflow, entre 5 y 6 horas
-    # (el correo llegó entre las 12:30 y las 13:10 hora de Madrid). El minuto 23
-    # evita la hora en punto, que es la más congestionada. El fichero se llamaba
-    # send-notification.yml hasta el 02/10/2026.
-    - cron: '23 5 * * *'
+    # 3 horas; en octubre de 2026 entre 5 y 6 horas. Con esta hora, incluso con
+    # 6 horas de retraso el recordatorio llega antes de las 10:00 hora de Madrid
+    # en cualquier época del año. El minuto 47 evita la hora en punto, que es
+    # la más congestionada. El fichero se llamaba send-notification.yml hasta
+    # el 02/10/2026.
+    - cron: '47 1 * * *'
 
 permissions:
   contents: write   # necesario para el commit de keepalive
