@@ -18,12 +18,11 @@ on:
         type: boolean
   schedule:
     # 05:23 UTC = 07:23 en Madrid en verano, 06:23 en invierno.
-    # GitHub suele retrasar los crons entre 1 y 3 horas (más en las horas en
-    # punto, por eso el minuto 23), así que el correo llega normalmente entre
-    # las 7 y las 9 de la mañana. Tras la reactivación del workflow (29/09/2026)
-    # el cron dejó de ejecutarse aunque se cambiara esta línea; el 02/10/2026 se
-    # recreó el workflow con otro nombre de fichero (antes send-notification.yml)
-    # para que GitHub registrara la programación desde cero.
+    # GitHub ejecuta los crons con retraso variable: en julio de 2026 entre 2 y
+    # 3 horas; en octubre de 2026, tras reactivar el workflow, entre 5 y 6 horas
+    # (el correo llegó entre las 12:30 y las 13:10 hora de Madrid). El minuto 23
+    # evita la hora en punto, que es la más congestionada. El fichero se llamaba
+    # send-notification.yml hasta el 02/10/2026.
     - cron: '23 5 * * *'
 
 permissions:

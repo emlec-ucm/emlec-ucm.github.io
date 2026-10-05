@@ -24,7 +24,7 @@ direcciones de los demás.
 | Correo | Cuándo | Cómo se decide |
 |---|---|---|
 | **Nueva sesión** | Al hacer push a `main` | Se compara `content/TheComputationalGarage/sesiones.org` con el estado anterior al push. Por cada sesión **nueva con fecha futura** se envía un aviso. Añadir sesiones pasadas o corregir textos no envía nada. |
-| **Recordatorio** | Cada mañana (cron a las 05:23 UTC, es decir, entre las 7 y las 9 hora de Madrid según el retraso de GitHub) | Solo si hay una sesión programada **para mañana**. |
+| **Recordatorio** | Cada día (cron a las 05:23 UTC; GitHub lo ejecuta con retraso variable, desde una hora hasta seis, así que llega entre las 7 y las 13 hora de Madrid) | Solo si hay una sesión programada **para mañana**. |
 
 Los datos de la sesión (fecha, hora, ponentes, lugar) se toman de `sesiones.org`:
 
@@ -297,10 +297,13 @@ EMAIL_USER=x EMAIL_PASSWORD=x EMAIL_RECIPIENTS=a@ucm.es \
 
 Comprobaciones que solo pueden hacerse cuando ocurran:
 
-- [ ] **Primera ejecución del cron** con el sistema nuevo: el run de "Send Email
-  Notification" debe salir en verde con "No hay sesión mañana" en el log. No
-  se ejecutó ni el 30/09 ni el 01/10/2026 tras reactivar el workflow; el
-  02/10/2026 se recreó con otro nombre de fichero (`recordatorios.yml`). El paso de keepalive solo hace algo cuando
+- [x] **Primera ejecución del cron** con el sistema nuevo: verificada el
+  03/10 y el 04/10/2026 (runs en verde, keepalive sin commit, lista leída,
+  "No hay sesión mañana"). Ojo: tras la reactivación, GitHub ejecutó el cron
+  con 5 o 6 horas de retraso (entre las 12:30 y las 13:10 hora de Madrid), y
+  el 30/09 no lo ejecutó. El workflow se recreó el 02/10 como
+  `recordatorios.yml` creyendo que no funcionaba; no era necesario, pero no
+  estorba. El paso de keepalive solo hace algo cuando
   el repositorio lleva 50 días sin commits.
 - [ ] **Primera sesión real del curso**: al añadirla a `sesiones.org` y hacer
   push, el run de "Push Web Deploy" debe enviar el aviso a todos los
